@@ -89,7 +89,6 @@ export default StyleSheet.create({
     backgroundColor: '#eeeeee',
     marginBottom: height * 0.025,
   },
-
   otpContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',

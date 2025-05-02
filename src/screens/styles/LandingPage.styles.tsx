@@ -53,7 +53,7 @@ export default  StyleSheet.create({
         width: '100%',
         height: 1,
         backgroundColor: '#eeeeee',
-        marginBottom: height * 0.02,
+        marginBottom: height * 0.025,
       },
       fullButton: {
         width: '100%',

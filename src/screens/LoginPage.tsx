@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView, Alert } from 'react-native';
-import style from './Loginpage.styles'; // Your custom styles
+import style from './styles/Loginpage.styles'; // Your custom styles
 
 const LoginPage = () => {
   const phoneInputRef = useRef<TextInput>(null);
