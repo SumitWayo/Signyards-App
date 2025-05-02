@@ -15,7 +15,6 @@ const Footer = () => {
 
   return (
     <View style={styles.footer}>
-            <View style={styles.bottomBorder} />
       
       <View style={styles.iconContainer}>
         <TouchableOpacity

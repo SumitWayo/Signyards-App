@@ -1,14 +1,12 @@
+import { StyleSheet, Dimensions, Platform } from 'react-native';
 
-import { StyleSheet, Dimensions,Platform } from 'react-native';
+const { width, height } = Dimensions.get('window');
 
-const { height, width } = Dimensions.get('window');
-const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
-
-export default  StyleSheet.create({ container: {
+export default StyleSheet.create({
+  container: {
     width: '100%',
-    paddingTop: Platform.OS === 'android' ? 40 : 0,
-    
-    paddingBottom: 20,
+    paddingTop: Platform.OS === 'android' ? 40 : 20,
+    paddingBottom: height * 0.025,
     justifyContent: 'center',
     position: 'relative',
     backgroundColor: '#fff',
@@ -16,10 +14,10 @@ export default  StyleSheet.create({ container: {
   circle: {
     position: 'absolute',
     top: Platform.OS === 'android' ? 40 : 20,
-    left: 16,
-    width: screenWidth * 0.1,
-    height: screenWidth * 0.1,
-    borderRadius: screenWidth * 0.05,
+    left: width * 0.04,
+    width: width * 0.1,
+    height: width * 0.1,
+    borderRadius: width * 0.05,
     backgroundColor: '#D4E3FF',
     alignItems: 'center',
     justifyContent: 'center',
@@ -27,48 +25,48 @@ export default  StyleSheet.create({ container: {
   letter: {
     color: '#6395EE',
     fontWeight: 'bold',
-    fontSize: screenWidth * 0.04,
+    fontSize: width * 0.045,
   },
   titleContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 10,
+    paddingVertical: height * 0.012,
   },
   title: {
-    fontSize: screenWidth * 0.065,
-    lineHeight: screenWidth * 0.08,
+    fontSize: width * 0.065,
+    lineHeight: width * 0.08,
     textAlign: 'center',
     fontFamily: 'Pattaya-Regular',
-    fontWeight: '400',
+    fontWeight: Platform.OS === 'ios' ? '500' : '400',
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: screenWidth - 32,
-    height: screenHeight * 0.07,
-    marginTop: 12,
-    marginHorizontal: 16,
+    width: width * 0.92,
+    height: height * 0.07,
+    marginTop: height * 0.015,
+    marginHorizontal: width * 0.04,
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 8,
-    paddingHorizontal: 12,
+    paddingHorizontal: width * 0.03,
     backgroundColor: '#fff',
   },
   searchIcon: {
-    width: screenWidth * 0.05,
-    height: screenWidth * 0.05,
-    marginRight: 10,
+    width: width * 0.05,
+    height: width * 0.05,
+    marginRight: width * 0.025,
     resizeMode: 'contain',
   },
   searchPlaceholder: {
-    fontSize: screenWidth * 0.04,
+    fontSize: width * 0.04,
     color: '#888',
     flexShrink: 1,
   },
   searchInput: {
-    fontSize: screenWidth * 0.04,
+    fontSize: width * 0.04,
     color: '#000',
     flex: 1,
-    paddingVertical: 0, // optional, to better align text vertically
+    paddingVertical: 0,
   },
 });

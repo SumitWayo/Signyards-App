@@ -1,48 +1,46 @@
-import { StyleSheet, Dimensions } from 'react-native';
-const { width } = Dimensions.get('window');
+import { StyleSheet, Dimensions, Platform } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
-      backgroundColor: '#f5f5f5',
- 
+    backgroundColor: '#f5f5f5',
     justifyContent: 'space-between',
-    paddingVertical: 40,
+    paddingVertical: height * 0.05, // ~40px on standard phones
   },
   container: {
     backgroundColor: '#f5f5f5',
-
     alignItems: 'center',
-    paddingHorizontal: 20,
-    marginTop: 100,
+    paddingHorizontal: width * 0.05, // ~20px
+    marginTop: height * 0.12, // ~100px
   },
   heading: {
     fontFamily: 'Poppins',
     fontWeight: '800',
-    fontSize: 22,
-    lineHeight: 30,
+    fontSize: width * 0.055, // ~22px
+    lineHeight: width * 0.075, // ~30px
     textAlign: 'center',
     color: '#000',
-    marginBottom: 16,
+    marginBottom: height * 0.02,
   },
   paragraph: {
     fontFamily: 'Poppins',
     fontWeight: '500',
-    fontSize: 14,
-    lineHeight: 21,
+    fontSize: width * 0.035, // ~14px
+    lineHeight: width * 0.05, // ~21px
     textAlign: 'center',
     color: '#333',
-    paddingHorizontal: 10,
+    paddingHorizontal: width * 0.025, // ~10px
   },
   buttonContainer: {
     paddingHorizontal: width * 0.1,
-    marginTop: 16, // space below the paragraph
+    marginTop: height * 0.02,
     width: '100%',
   },
-  
   fullButton: {
     width: '100%',
-    height: 56,
+    height: height * 0.07, // ~56px
     borderRadius: 12,
     backgroundColor: '#6395EE',
     alignItems: 'center',
@@ -50,8 +48,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontFamily: 'NotoSans-SemiBold',
-    fontWeight: '600',
-    fontSize: width * 0.045,
+    fontWeight: Platform.OS === 'ios' ? '600' : '700',
+    fontSize: width * 0.045, // ~16px
     color: 'white',
     textAlign: 'center',
   },

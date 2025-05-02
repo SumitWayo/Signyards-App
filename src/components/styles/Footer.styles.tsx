@@ -1,50 +1,49 @@
-
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
 
 const { height, width } = Dimensions.get('window');
 
-export default  StyleSheet.create({
-    footer: {
-        width: '100%',
-        height: 100, 
-        position: 'absolute',
-        top:815,  
-        paddingTop: 10,
-        alignItems: 'center',
-        borderTopWidth: 0.5,  
-        borderTopColor: '#E6E6E6',  
-      },
+export default StyleSheet.create({
+  footer: {
+    width: '100%',
+    height: height * 0.12, // still responsive height
+    position: 'absolute',
+    top: 815, // keeping your original positioning
+    paddingTop: height * 0.02,
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderTopWidth: 0.5,
+    borderTopColor: '#E6E6E6',
+  },
   footerTitle: {
-    fontSize: 18,
+    fontSize: width * 0.045,
     fontWeight: 'bold',
   },
   iconContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '100%',
-    paddingHorizontal: 20,
+    paddingHorizontal: width * 0.05,
   },
   iconItem: {
     alignItems: 'center',
   },
   icon: {
-    width: 20,
-    height: 20,
+    width: width * 0.06,
+    height: width * 0.06,
     resizeMode: 'contain',
   },
   label: {
-    marginTop: 4,
-    fontSize: 12,
+    marginTop: height * 0.005,
+    fontSize: width * 0.03,
   },
   selectedItem: {
-    backgroundColor: 'white', // optional: change background color for selected item
+    backgroundColor: 'white',
   },
   selectedIcon: {
-    tintColor: '#6395EE', // color for selected icon
+    tintColor: '#6395EE',
   },
   selectedLabel: {
-    color: '#6395EE', // color for selected label
-      
+    color: '#6395EE',
   },
   bottomBorder: {
     width: '100%',
