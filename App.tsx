@@ -1,29 +1,32 @@
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const App = () => {
+import AllScreensPage from './src/screens/AllScreensPage';
+import LoginPage from './src/screens/LoginPage';
+import LandingPage from './src/screens/LandingPage';
+import HomePage from './src/screens/HomePage';
+import ProjectPage from './src/screens/ProjectPage';
+import GroupPage from './src/screens/GroupPage';
+import SubProjectPage from './src/screens/SubProjectPage';
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>ffffff</Text>
-      <Text>hhh</Text>
-      <Text>hh</Text>
-      <Text>ffffff</Text>
-      <Text>ffffff</Text>
-      <Text>ffffff</Text>
-      <Text>ffffff</Text>
-      <Text>ffffff</Text>
-      <Text>ffffff</Text>
-      <Text>ffffff</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="AllScreens"
+        screenOptions={{ headerShown: false }} // Hides header for all screens
+      >
+        <Stack.Screen name="AllScreens" component={AllScreensPage} />
+        <Stack.Screen name="LoginPage" component={LoginPage} />
+        <Stack.Screen name="LandingPage" component={LandingPage} />
+        <Stack.Screen name="HomePage" component={HomePage} />
+        <Stack.Screen name="ProjectPage" component={ProjectPage} />
+        <Stack.Screen name="GroupPage" component={GroupPage} />
+        <Stack.Screen name="SubProjectPage" component={SubProjectPage} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center', // vertical centering
-    alignItems: 'center', // horizontal centering
-  },
-});
-
-export default App;
+}

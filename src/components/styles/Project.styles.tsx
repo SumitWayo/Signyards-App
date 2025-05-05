@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f5f5f5',
     alignItems: 'center',
-    paddingHorizontal: width * 0.05, // ~20px
+    paddingHorizontal: width * 0.04, // ~20px
     marginTop: height * 0.12, // ~100px
   },
   heading: {
@@ -53,6 +53,65 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
   },
+  personRow: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: height * 0.015,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+    borderRadius: 8,
+    marginBottom: height * 0.01,
+  },
+  personInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  avatar: {
+    width: width * 0.11,
+    height: width * 0.11,
+    borderRadius: (width * 0.12) / 2,
+    marginRight: width * 0.02,
+  },
+  name: {
+    fontFamily: 'NotoSans',
+    fontSize: width * 0.04,
+    color: '#000',
+    fontWeight: '700',
+  },
+  // Styling for the unread message count badge and time
+  rightInfo: {
+    height: width * 0.12, // same as avatar height
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    alignSelf: 'flex-start',
+    paddingVertical: 2,
+  },
+  
+  unreadBadge: {
+    backgroundColor: '#6395EE',
+    borderRadius: 10,
+    minWidth: 20,
+    height: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 6,
+  },
+  
+  unreadCount: {
+    fontFamily: 'NotoSans',
+    fontSize: 11,
+    color: '#FFF',
+    fontWeight: '700',
+  },
+  time: {
+    fontFamily: 'NotoSans',
+    fontSize: 11,
+    color: '#777',
+  },
+  
+  
 });
 
 export default styles;
