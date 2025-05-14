@@ -9,6 +9,10 @@ import HomePage from './src/screens/HomePage';
 import ProjectPage from './src/screens/ProjectPage';
 import GroupPage from './src/screens/GroupPage';
 import SubProjectPage from './src/screens/SubProjectPage';
+import TeamMemberPage from './src/screens/TeamMemberPage';
+import MemberPage from './src/screens/MemberPage';
+import ProjectInfoPage from './src/screens/ProjectInfoPage';
+import MediaPage from './src/screens/MediaPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +30,14 @@ export default function App() {
         <Stack.Screen name="ProjectPage" component={ProjectPage} />
         <Stack.Screen name="GroupPage" component={GroupPage} />
         <Stack.Screen name="SubProjectPage" component={SubProjectPage} />
+        <Stack.Screen name="TeamMemberPage" component={TeamMemberPage} />
+        <Stack.Screen name="MemberPage" component={MemberPage} />
+        <Stack.Screen name="ProjectInfoPage" component={ProjectInfoPage} />
+        <Stack.Screen name="MediaPage" component={MediaPage} />
+
+
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );
