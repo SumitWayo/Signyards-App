@@ -13,7 +13,6 @@ import {
 } from 'react-native';
 import { Button } from '../components/Button';
 import styles from './styles/TeamMemberPage.styles';
-const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const TeamMemberPage = () => {
   return (

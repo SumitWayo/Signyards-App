@@ -13,21 +13,15 @@ import {
 } from 'react-native';
 import { Button } from '../components/Button';
 import styles from './styles/ProjectPage.styles';
+import ProjectInfoHeader from '../components/ProjectInfoPageHeader';
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const SubProjectPage = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.arrowContainer}>
-          <Image
-            source={require('../../assets/Images/back.png')}
-            style={styles.arrowIcon}
-          />
-        </TouchableOpacity>
-        <Text style={styles.title}>Create Sub-Project</Text>
-      </View>
+      <ProjectInfoHeader title="Create Sub-project" showSearch={false} />
+
 
       {/* Main Content */}
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -45,6 +39,21 @@ const SubProjectPage = () => {
           </View>
         </View>
       </ScrollView>
+        {/* Photo Upload Section */}
+        {/* <View style={styles.photoSection}>
+          
+          <View style={styles.searchContainer}>
+            <TextInput
+              style={styles.searchInput}
+              placeholder="sumit"
+              placeholderTextColor="#888"
+            /> 
+            
+          </View>
+          
+          
+
+        </View> */}
 
       <Button title="Create Sub-Project" />
     </SafeAreaView>

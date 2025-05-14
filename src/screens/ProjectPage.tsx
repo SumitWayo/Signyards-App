@@ -13,22 +13,14 @@ import {
 } from 'react-native';
 import { Button } from '../components/Button';
 import styles from './styles/ProjectPage.styles';
+import ProjectInfoHeader from '../components/ProjectInfoPageHeader';
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const ProjectPage = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.arrowContainer}>
-          <Image
-            source={require('../../assets/Images/back.png')}
-            style={styles.arrowIcon}
-          />
-        </TouchableOpacity>
-        <Text style={styles.title}>Create Project</Text>
-      </View>
-
+      <ProjectInfoHeader title="Create Project" showSearch={false} />
       {/* Main Content */}
       <ScrollView contentContainerStyle={styles.scrollContent}>
         {/* Photo Upload Section */}
