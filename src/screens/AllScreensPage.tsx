@@ -13,6 +13,16 @@ const screens = [
   { name: 'Project Page', route: 'ProjectPage' },
   { name: 'Group Page', route: 'GroupPage' },
   { name: 'SubProject Page', route: 'SubProjectPage' },
+  { name: 'Team Member', route: 'TeamMemberPage' },
+  { name: 'Member Page', route: 'MemberPage' },
+  { name: 'ProjectInfo Page', route: 'ProjectInfoPage' },
+  { name: 'MediaPage', route: 'MediaPage' },
+
+
+
+
+
+
 ];
 
 const AllScreensPage: React.FC = () => {
