@@ -88,4 +88,36 @@ export default StyleSheet.create({
           color: '#000',
           flex: 1,
         },
+
+        bottomContainer: {
+          paddingHorizontal: width * 0.05,
+          paddingBottom: height * 0.04,
+          backgroundColor: 'white',
+          justifyContent: 'flex-end', // Ensure content is aligned to the bottom if needed
+        },
+
+        bottomBorder: {
+          width: '100%',
+          height: 1,
+          backgroundColor: '#eeeeee',
+          marginBottom: height * 0.025,
+        },
+
+        fullButton: {
+          width: '100%',
+          height: height * 0.07,
+          borderRadius: 12,
+          backgroundColor: '#6395EE',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: height * 0.02, // Ensure there's spacing between the button and other elements
+        },
+        
+        buttonText: {
+          fontFamily: 'NotoSans-SemiBold',
+          fontWeight: '600',
+          fontSize: width * 0.05,  // Larger font for better emphasis
+          color: 'white',
+          textAlign: 'center',
+        },
       });

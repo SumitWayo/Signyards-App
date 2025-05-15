@@ -1,6 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView, Alert } from 'react-native';
 import style from './styles/Loginpage.styles'; // Your custom styles
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../src/types/navigation';
+import { useNavigation } from '@react-navigation/native';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'LoginPage'>;
+
 
 const LoginPage = () => {
   const phoneInputRef = useRef<TextInput>(null);
@@ -9,6 +15,8 @@ const LoginPage = () => {
   const [otp, setOtp] = useState(['', '', '', '']);
   const otpInputs = Array(4).fill(null).map(() => useRef<TextInput>(null));
   const [focusInput, setFocusInput] = useState<number | null>(null); // Track focused input
+  const navigation = useNavigation<NavigationProp>();
+
 
   useEffect(() => {
     setTimeout(() => {
@@ -48,6 +56,7 @@ const LoginPage = () => {
   const handleVerifyOtp = () => {
     const otpEntered = otp.join('');
     if (otpEntered === '1234') {
+      navigation.navigate("HomePage" as keyof RootStackParamList)
       Alert.alert('Verification Successful', 'Your phone number has been verified');
     } else {
       Alert.alert('Verification Failed', 'The OTP you entered is incorrect');
