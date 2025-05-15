@@ -1,11 +1,15 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../src/types/navigation';
+import { useNavigation } from '@react-navigation/native';
 import style from "./styles/LandingPage.styles"
 
-
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'LandingPage'>;
 const { height, width } = Dimensions.get('window');
 
 const LandingPage = () => {
+  const navigation = useNavigation<NavigationProp>();
   return (
     <View style={style.container}>
       {/* Centered top content */}
@@ -32,7 +36,9 @@ const LandingPage = () => {
       {/* Bottom fixed section */}
       <View style={style.bottomContainer}>
         <View style={style.bottomBorder} />
-        <TouchableOpacity style={style.fullButton}>
+        <TouchableOpacity style={style.fullButton}
+          onPress={() => navigation.navigate("LoginPage" as keyof RootStackParamList)}
+          >
           <Text style={style.buttonText}>Get Started</Text>
         </TouchableOpacity>
       </View>

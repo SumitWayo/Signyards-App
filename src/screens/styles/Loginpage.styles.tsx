@@ -63,7 +63,7 @@ export default StyleSheet.create({
     paddingBottom: height * 0.04,
     backgroundColor: 'white',
     justifyContent: 'flex-end', // Ensure content is aligned to the bottom if needed
-  },
+  }, 
   
   fullButton: {
     width: '100%',
