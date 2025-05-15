@@ -18,6 +18,8 @@ const screens = [
   { name: 'ProjectInfo Page', route: 'ProjectInfoPage' },
   { name: 'MediaPage', route: 'MediaPage' },
   { name: 'ListPage', route: 'ListPage' },
+  { name: 'MentionPage', route: 'MentionPage' },
+
 
 
 

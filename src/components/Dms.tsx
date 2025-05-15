@@ -5,8 +5,10 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  Alert
 } from 'react-native';
 import styles from './styles/Project.styles';
+import NoMessagesPlaceholder from './NoMessagePlaceholder';
 
 const people = [
   { 
@@ -36,19 +38,14 @@ const Dms = () => {
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
-        <Text style={styles.heading}>No Direct Messages Yet</Text>
-        <Text style={styles.paragraph}>
-        Start a conversation with any team member{'\n'}
-        to discuss quick updates, questions,{'\n'}
-        or on-site issues—one-on-one.
-        </Text>
-
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.fullButton}>
-            <Text style={styles.buttonText}>Add a Team Member to Chat</Text>
-          </TouchableOpacity>
-        </View>
-
+     
+        <NoMessagesPlaceholder
+          heading="No Direct Messages Yet"
+          paragraph={`Start a conversation with any team member\n to discuss quick updates, questions,\n or on-site issues—one-on-one.`}
+          buttonLabel="Add a Team Member to Chat"
+          onPress={() => Alert.alert('Button Pressed!')}
+        />
+    
         {/* {people.map(person => (
           <TouchableOpacity key={person.id} style={styles.personRow}>
             <View style={styles.personInfo}>

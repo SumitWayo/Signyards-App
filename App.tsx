@@ -14,6 +14,7 @@ import MemberPage from './src/screens/MemberPage';
 import ProjectInfoPage from './src/screens/ProjectInfoPage';
 import MediaPage from './src/screens/MediaPage';
 import ListPage from './src/screens/ListPage';
+import MentionPage from './src/screens/MentionPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,8 @@ export default function App() {
         <Stack.Screen name="ProjectInfoPage" component={ProjectInfoPage} />
         <Stack.Screen name="MediaPage" component={MediaPage} />
         <Stack.Screen name="ListPage" component={ListPage} />
+        <Stack.Screen name="MentionPage" component={MentionPage} />
+
 
 
 
