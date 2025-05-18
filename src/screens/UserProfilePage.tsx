@@ -21,7 +21,7 @@ const UserProfilePage = () => {
 
         <View style={styles.smallBox}>
           <Image
-            source={require('../../assets/Images/edit.png')}
+            source={require('../../assets/icons/editprofile.png')}
             style={styles.smallBoxImage}
             resizeMode="contain"
           />

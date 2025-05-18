@@ -192,7 +192,7 @@ const MediaPage = () => {
                 {items.map((item) => (
                   <View key={item.id} style={styles.linkItem}>
                     <Image
-            source={require('../../assets/Images/pdf.png')}
+            source={require('../../assets/icons/pdf.png')}
             style={styles.mediaItem}
                     />
                     <View style={styles.linkContent}>
@@ -219,7 +219,7 @@ const MediaPage = () => {
       <View style={styles.header}>
         <TouchableOpacity style={styles.iconWrapper}>
           <Image
-            source={require('../../assets/Images/back.png')}
+            source={require('../../assets/icons/backarrow.png')}
             style={styles.backIcon}
           />
         </TouchableOpacity>

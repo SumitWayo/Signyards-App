@@ -28,7 +28,7 @@ const ProjectPage = () => {
           <View style={styles.photoRow}>
             <View style={styles.circle}>
               <Image
-                source={require('../../assets/Images/camera.png')}
+                source={require('../../assets/icons/camera.png')}
                 style={styles.cameraIcon}
               />
             </View>

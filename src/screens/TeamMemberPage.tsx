@@ -13,20 +13,13 @@ import {
 } from 'react-native';
 import { Button } from '../components/Button';
 import styles from './styles/TeamMemberPage.styles';
+import ProjectInfoHeader from '../components/ProjectInfoPageHeader';
 
 const TeamMemberPage = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.arrowContainer}>
-          <Image
-            source={require('../../assets/Images/back.png')}
-            style={styles.arrowIcon}
-          />
-        </TouchableOpacity>
-        <Text style={styles.title}>Add Member</Text>
-      </View>
+     <ProjectInfoHeader showSearch={false}/>
 
       {/* Main Content */}
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -36,12 +29,18 @@ const TeamMemberPage = () => {
           {/* Project Name Input */}
           <Text style={styles.heading}>Enter Name</Text>
           <View style={styles.searchContainer}>
-            <TextInput
-              style={styles.searchInput}
-              placeholder="John deo"
-              placeholderTextColor="#888"
-            />
-          </View>
+  <TextInput
+    style={[styles.searchInput, { flex: 1 }]}
+    placeholder="John deo"
+    placeholderTextColor="#888"
+  />
+  <Image
+              source={require('../../assets/icons/contact.png')} 
+              style={styles.icon}
+    resizeMode="contain"
+  />
+</View>
+
           <Text style={styles.heading}>Enter Number</Text>
           <View style={styles.searchContainer}>
             <TextInput

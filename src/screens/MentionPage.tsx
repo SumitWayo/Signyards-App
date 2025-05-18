@@ -61,7 +61,7 @@ const MentionPage = () => {
               </View>
 
               <Image
-                source={require('../../assets/Images/rightarrow.png')}
+                source={require('../../assets/icons/bluearrow.png')}
                 style={styles.arrowIcon}
               />
             </View>

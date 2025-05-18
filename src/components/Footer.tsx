@@ -22,7 +22,7 @@ const Footer = () => {
           onPress={() => handlePress('projects')}
         >
           <Image
-            source={require('../../assets/Images/projectBlack.png')}
+            source={require('../../assets/icons/projects.png')}
             style={[styles.icon, getItemStyle('projects') && styles.selectedIcon]}
           />
           <Text style={[styles.label, getItemStyle('projects') && styles.selectedLabel]}>
@@ -35,7 +35,7 @@ const Footer = () => {
           onPress={() => handlePress('dms')}
         >
           <Image
-            source={require('../../assets/Images/messageBlack.png')}
+            source={require('../../assets/icons/dms.png')}
             style={[styles.icon, getItemStyle('dms') && styles.selectedIcon]}
           />
           <Text style={[styles.label, getItemStyle('dms') && styles.selectedLabel]}>
@@ -48,7 +48,7 @@ const Footer = () => {
           onPress={() => handlePress('mention')}
         >
           <Image
-            source={require('../../assets/Images/@black.png')}
+            source={require('../../assets/icons/mentions.png')}
             style={[styles.icon, getItemStyle('mention') && styles.selectedIcon]}
           />
           <Text style={[styles.label, getItemStyle('mention') && styles.selectedLabel]}>
@@ -61,7 +61,7 @@ const Footer = () => {
           onPress={() => handlePress('updates')}
         >
           <Image
-            source={require('../../assets/Images/projectBlack.png')}
+            source={require('../../assets/icons/updates.png')}
             style={[styles.icon, getItemStyle('updates') && styles.selectedIcon]}
           />
           <Text style={[styles.label, getItemStyle('updates') && styles.selectedLabel]}>

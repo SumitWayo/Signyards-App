@@ -8,6 +8,7 @@ import {
   Image,
   SafeAreaView,
   TextInput,
+  TouchableOpacity, // ✅ Added this import
 } from 'react-native';
 import styles from './styles/Header.styles';
 
@@ -16,9 +17,10 @@ const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 interface HeaderProps {
   title?: string;
   showSearch?: boolean;
+  onAddPersonPress?: () => void; // ✅ Added prop
 }
 
-const Header: React.FC<HeaderProps> = ({ title = 'HomePage', showSearch = true }) => {
+const Header: React.FC<HeaderProps> = ({ title = 'HomePage', showSearch = true, onAddPersonPress }) => {
   return (
     <SafeAreaView>
       <View style={styles.container}>
@@ -36,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({ title = 'HomePage', showSearch = true }
         {showSearch && (
           <View style={styles.searchContainer}>
             <Image
-              source={require('../../assets/Images/search.png')}
+              source={require('../../assets/icons/search.png')}
               style={styles.searchIcon}
             />
             <TextInput
@@ -46,6 +48,14 @@ const Header: React.FC<HeaderProps> = ({ title = 'HomePage', showSearch = true }
             />
           </View>
         )}
+
+        {/* Add Person Icon - top-right */}
+        <TouchableOpacity style={styles.addPersonIconContainer} onPress={onAddPersonPress}>
+          <Image
+            source={require('../../assets/icons/addperson.png')}
+            style={styles.addPersonIcon}
+          />
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

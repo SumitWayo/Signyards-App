@@ -72,7 +72,12 @@ type Message = {
               />
               <Text style={styles.title}>Pune Interior</Text>
             </View>
-
+            <TouchableOpacity>
+              <Image
+                source={require('../../assets/icons/addpeople.png')}
+                style={styles.addIcon}
+              />
+            </TouchableOpacity>
             <TouchableOpacity>
               <Image
                 source={require('../../assets/Images/add.png')}

@@ -39,14 +39,14 @@ const Dms = () => {
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
      
-        <NoMessagesPlaceholder
+        {/* <NoMessagesPlaceholder
           heading="No Direct Messages Yet"
           paragraph={`Start a conversation with any team member\n to discuss quick updates, questions,\n or on-site issues—one-on-one.`}
           buttonLabel="Add a Team Member to Chat"
           onPress={() => Alert.alert('Button Pressed!')}
-        />
+        /> */}
     
-        {/* {people.map(person => (
+        {people.map(person => (
           <TouchableOpacity key={person.id} style={styles.personRow}>
             <View style={styles.personInfo}>
               <Image source={person.image} style={styles.avatar} />
@@ -64,7 +64,7 @@ const Dms = () => {
               <Text style={styles.time}>{person.time}</Text>
             </View>
           </TouchableOpacity>
-        ))} */}
+        ))}
       </View>
     </ScrollView>
   );
