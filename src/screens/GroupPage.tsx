@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import {
   View,
-  StyleSheet,
   SafeAreaView,
   Text,
   Image,
-  Dimensions,
   Platform,
   TouchableOpacity,
   FlatList,
@@ -15,20 +13,28 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-const { width, height } = Dimensions.get('window');
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { RootStackParamList } from '../../src/types/navigation';
+
 import styles from './styles/GroupPage.styles';
+
+type GroupPageNavigationProp = NavigationProp<RootStackParamList, 'GroupPage'>;
+
 const GroupPage = () => {
+  const navigation = useNavigation<GroupPageNavigationProp>();
+
   const labels = ['Electricals', 'Plywood home', 'Sign board jabalpur'];
 
-  const [messages, setMessages] = useState([
+  type Message = {
+    id: string;
+    text: string;
+    isUser: boolean;
+  };
+
+  const [messages, setMessages] = useState<Message[]>([
     { id: '1', text: 'Hi, how can I help you?', isUser: false },
     { id: '2', text: 'I want to inquire about plywood sheets.', isUser: true },
   ]);
-type Message = {
-  id: string;
-  text: string;
-  isUser: boolean;
-};
   const [input, setInput] = useState('');
 
   const sendMessage = () => {
@@ -36,6 +42,10 @@ type Message = {
       setMessages([...messages, { id: Date.now().toString(), text: input, isUser: true }]);
       setInput('');
     }
+  };
+
+  const handlePlusPress = () => {
+    navigation.navigate('SubProjectPage');
   };
 
   const renderItem = ({ item }: { item: Message }) => (
@@ -48,7 +58,7 @@ type Message = {
         },
       ]}
     >
-      <Text style={styles.messageText}>{item.text} </Text>
+      <Text style={styles.messageText}>{item.text}</Text>
     </View>
   );
 
@@ -72,15 +82,17 @@ type Message = {
               />
               <Text style={styles.title}>Pune Interior</Text>
             </View>
+
             <TouchableOpacity>
               <Image
                 source={require('../../assets/icons/addpeople.png')}
                 style={styles.addIcon}
               />
             </TouchableOpacity>
-            <TouchableOpacity>
+
+            <TouchableOpacity onPress={handlePlusPress}>
               <Image
-                source={require('../../assets/Images/add.png')}
+                source={require('../../assets/icons/plus.png')}
                 style={styles.addIcon}
               />
             </TouchableOpacity>
@@ -136,7 +148,5 @@ type Message = {
     </SafeAreaView>
   );
 };
-
- 
 
 export default GroupPage;

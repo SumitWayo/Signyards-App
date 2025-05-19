@@ -46,6 +46,9 @@ export default StyleSheet.create({ safeArea: {
     width: width * 0.06,
     height: width * 0.06,
     resizeMode: 'contain',
+        paddingHorizontal: 15,
+
+
   },
   labelContainer: {
     flexDirection: 'row',
