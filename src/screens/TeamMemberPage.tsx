@@ -14,13 +14,27 @@ import {
 import { Button } from '../components/Button';
 import styles from './styles/TeamMemberPage.styles';
 import ProjectInfoHeader from '../components/ProjectInfoPageHeader';
-
+import useTypedNavigation from '../hooks/useTypedNavigation';
+const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 const TeamMemberPage = () => {
+  const navigation = useTypedNavigation<'TeamMemberPage'>();
+
   return (
     <SafeAreaView style={styles.safeArea}>
       {/* Header */}
      <ProjectInfoHeader showSearch={false}/>
-
+      <View style={styles.header}>
+        <TouchableOpacity 
+          style={styles.arrowContainer} 
+          onPress={() => navigation.goBack()}
+        >
+          <Image
+            source={require('../../assets/Images/back.png')}
+            style={styles.arrowIcon}
+          />
+        </TouchableOpacity>
+        <Text style={styles.title}>Add Member</Text>
+      </View>
       {/* Main Content */}
       <ScrollView contentContainerStyle={styles.scrollContent}>
         {/* Photo Upload Section */}

@@ -9,6 +9,12 @@ import {
 } from 'react-native';
 import styles from './styles/Project.styles';
 import NoMessagesPlaceholder from './NoMessagePlaceholder';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../src/types/navigation';
+import { useNavigation } from '@react-navigation/native';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Dms'>;
+
 
 const people = [
   { 
@@ -35,10 +41,11 @@ const people = [
 ];
 
 const Dms = () => {
+  const navigation = useNavigation<NavigationProp>();
+
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.container}>
-     
+      <View style={styles.container}>     
         {/* <NoMessagesPlaceholder
           heading="No Direct Messages Yet"
           paragraph={`Start a conversation with any team member\n to discuss quick updates, questions,\n or on-site issues—one-on-one.`}
@@ -47,6 +54,23 @@ const Dms = () => {
         /> */}
     
         {people.map(person => (
+        <Text style={styles.heading}>No Direct Messages Yet</Text>
+        <Text style={styles.paragraph}>
+        Start a conversation with any team member{'\n'}
+        to discuss quick updates, questions,{'\n'}
+        or on-site issues—one-on-one.
+        </Text>
+
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.fullButton}
+          onPress={() => navigation.navigate("TeamMemberPage" as keyof RootStackParamList)}
+
+          >
+            <Text style={styles.buttonText}>Add a Team Member to Chat</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* {people.map(person => (
           <TouchableOpacity key={person.id} style={styles.personRow}>
             <View style={styles.personInfo}>
               <Image source={person.image} style={styles.avatar} />

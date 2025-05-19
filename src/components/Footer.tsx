@@ -2,11 +2,22 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import styles from "./styles/Footer.styles"
 
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../src/types/navigation';
+import { useNavigation } from '@react-navigation/native';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Footer'>;
+
 const Footer = () => {
+  const navigation = useNavigation<NavigationProp>();
+
   const [selectedItem, setSelectedItem] = useState(null);
 
   const handlePress = (item: any) => {
     setSelectedItem(item);
+    if(item=='dms'){
+      navigation.navigate("MemberPage" as keyof RootStackParamList)
+    }
   };
 
   const getItemStyle = (item: any) => {

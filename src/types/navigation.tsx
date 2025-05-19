@@ -6,5 +6,10 @@ export type RootStackParamList = {
     ProjectPage: undefined;
     GroupPage: undefined;
     SubProjectPage: undefined;
+    Footer:undefined;
+    MemberPage:undefined;
+    Dms:undefined;
+    TeamMemberPage:undefined;
+
   };
   

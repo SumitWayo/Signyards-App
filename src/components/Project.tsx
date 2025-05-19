@@ -1,4 +1,10 @@
 import React from 'react';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../src/types/navigation';
+import { useNavigation } from '@react-navigation/native';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'LoginPage'>;
+
 import {
   View,
   Text,
@@ -33,6 +39,8 @@ const people = [
 ];
 
 const Project = () => {
+  const navigation = useNavigation<NavigationProp>();
+
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
@@ -45,7 +53,10 @@ const Project = () => {
         </Text>
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.fullButton}>
+          <TouchableOpacity style={styles.fullButton}
+           onPress={() => navigation.navigate("ProjectPage" as keyof RootStackParamList)}
+
+          >
             <Text style={styles.buttonText}>Create Your First Project</Text>
           </TouchableOpacity>
         </View>
