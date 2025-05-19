@@ -12,8 +12,7 @@ const HomePage = () => {
   return (
     <View style={{    backgroundColor: '#f5f5f5',flex:1}}>
         <Header/>
-
-        <Dms/>
+        <Project/>
         <Footer/>
     </View>
   );
