@@ -24,7 +24,7 @@ const ProjectInfoPage = () => {
           <View style={styles.rightContainer}>
             <Text style={styles.numberText}>155</Text>
             <Image
-              source={require('../../assets/Images/rightarrow.png')} 
+              source={require('../../assets/icons/bluearrow.png')} 
               style={styles.arrowIcon}
             />
           </View>
@@ -34,7 +34,7 @@ const ProjectInfoPage = () => {
           <View style={styles.rightContainer}>
             <Text style={styles.numberText}>4</Text>
             <Image
-              source={require('../../assets/Images/rightarrow.png')} 
+              source={require('../../assets/icons/bluearrow.png')} 
               style={styles.arrowIcon}
             />
           </View>
@@ -42,7 +42,7 @@ const ProjectInfoPage = () => {
           <Text style={styles.leftText}>Edit Project</Text>
           <View style={styles.rightContainer}>
             <Image
-              source={require('../../assets/Images/rightarrow.png')} 
+              source={require('../../assets/icons/bluearrow.png')} 
               style={styles.arrowIcon}
             />
           </View>
@@ -51,7 +51,7 @@ const ProjectInfoPage = () => {
           <Text style={styles.leftText}>Edit Sub-Projects</Text>
           <View style={styles.rightContainer}>
             <Image
-              source={require('../../assets/Images/rightarrow.png')} 
+              source={require('../../assets/icons/bluearrow.png')} 
               style={styles.arrowIcon}
             />
           </View>

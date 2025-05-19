@@ -17,7 +17,7 @@ const ProjectInfoHeader = ({ title = 'HomePage', showSearch = true }) => {
         <View style={styles.headerRow}>
           <TouchableOpacity style={styles.arrowWrapper} >
             <Image
-              source={require('../../assets/Images/back.png')}
+              source={require('../../assets/icons/backarrow.png')}
               style={styles.arrowIcon}
             />
           </TouchableOpacity>

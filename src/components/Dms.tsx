@@ -5,13 +5,16 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  Alert
 } from 'react-native';
 import styles from './styles/Project.styles';
+import NoMessagesPlaceholder from './NoMessagePlaceholder';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../src/types/navigation';
 import { useNavigation } from '@react-navigation/native';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Dms'>;
+
 
 const people = [
   { 
@@ -42,7 +45,15 @@ const Dms = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={styles.container}>
+      <View style={styles.container}>     
+        {/* <NoMessagesPlaceholder
+          heading="No Direct Messages Yet"
+          paragraph={`Start a conversation with any team member\n to discuss quick updates, questions,\n or on-site issues—one-on-one.`}
+          buttonLabel="Add a Team Member to Chat"
+          onPress={() => Alert.alert('Button Pressed!')}
+        /> */}
+    
+        {people.map(person => (
         <Text style={styles.heading}>No Direct Messages Yet</Text>
         <Text style={styles.paragraph}>
         Start a conversation with any team member{'\n'}
@@ -77,7 +88,7 @@ const Dms = () => {
               <Text style={styles.time}>{person.time}</Text>
             </View>
           </TouchableOpacity>
-        ))} */}
+        ))}
       </View>
     </ScrollView>
   );

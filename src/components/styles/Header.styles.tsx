@@ -69,4 +69,18 @@ export default StyleSheet.create({
     flex: 1,
     paddingVertical: 0,
   },
+  addPersonIconContainer: {
+    position: 'absolute',
+    top: Platform.OS === 'android' ? 40 : 20,
+
+    right: 10,
+    padding: 8,
+  },
+  
+  addPersonIcon: {
+    width: 24,
+    height: 24,
+    resizeMode: 'contain',
+  },
+  
 });

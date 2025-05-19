@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
     rowGap: hp(2),
   },
   mediaItem: {
-    width: wp(22),
-    height: wp(22),
+    width: wp(17),
+    height: wp(19),
     borderRadius: wp(2),
   },
   monthGroup: {
