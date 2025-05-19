@@ -7,6 +7,11 @@ import {
   Image,
 } from 'react-native';
 import styles from './styles/Project.styles';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../src/types/navigation';
+import { useNavigation } from '@react-navigation/native';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Dms'>;
 
 const people = [
   { 
@@ -33,6 +38,8 @@ const people = [
 ];
 
 const Dms = () => {
+  const navigation = useNavigation<NavigationProp>();
+
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
@@ -44,7 +51,10 @@ const Dms = () => {
         </Text>
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.fullButton}>
+          <TouchableOpacity style={styles.fullButton}
+          onPress={() => navigation.navigate("TeamMemberPage" as keyof RootStackParamList)}
+
+          >
             <Text style={styles.buttonText}>Add a Team Member to Chat</Text>
           </TouchableOpacity>
         </View>

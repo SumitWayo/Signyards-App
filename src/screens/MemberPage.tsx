@@ -8,6 +8,12 @@ import {
 } from 'react-native';
 import styles from '../screens/styles/MemberPage.styles';
 import Header from '../components/Header';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../src/types/navigation';
+import { useNavigation } from '@react-navigation/native';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'MemberPage'>;
+
 
 const people = [
   { 
@@ -38,10 +44,12 @@ const people = [
 
 
 const MemberPage = () => {
+  const navigation = useNavigation<NavigationProp>();
+
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.header}>
-        <TouchableOpacity style={styles.arrowContainer}>
+      <TouchableOpacity style={styles.arrowContainer}>
           <Image
             source={require('../../assets/Images/back.png')}
             style={styles.arrowIcon}
@@ -56,7 +64,7 @@ const MemberPage = () => {
               <Image source={person.image} style={styles.avatar} />
               <View>
                 <Text style={styles.name}>{person.name}</Text>
-                <Text style={styles.role}>{person.role}</Text> {/* Role below name */}
+                <Text style={styles.role}>{person.role}</Text>
 
               </View>
             </View>
