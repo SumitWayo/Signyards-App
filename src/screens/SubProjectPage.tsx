@@ -35,7 +35,7 @@ const SubProjectPage = () => {
 
     // Navigate to HomePage if input is valid
     navigation.navigate('GroupPage' as keyof RootStackParamList);
-    Alert.alert('Project Created', `Your project "${subProjectName}" has been created.`);
+    Alert.alert('Project Created', `Your Sub-Project "${subProjectName}" has been created.`);
   };
 
   return (
@@ -77,12 +77,9 @@ const SubProjectPage = () => {
           
 
         </View> */}
-      <View style={styles.bottomContainer}>
-              <View style={styles.bottomBorder} />
-              <TouchableOpacity style={styles.fullButton} onPress={addProject}>
-                <Text style={styles.buttonText}>Create Sub Project</Text>
-              </TouchableOpacity>
-            </View>
+
+      <Button title="Create Sub-Project" onPress={addProject}/>
+      
 
     </SafeAreaView>
   );

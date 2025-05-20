@@ -1,30 +1,68 @@
 import React, { useState } from 'react';
 import {
   View,
-  StyleSheet,
   SafeAreaView,
   Text,
   Image,
   TextInput,
-  Platform,
-  Dimensions,
   TouchableOpacity,
   ScrollView,
   Alert,
 } from 'react-native';
-import { Button } from '../components/Button';
-import styles from './styles/ProjectPage.styles';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import ProjectInfoHeader from '../components/ProjectInfoPageHeader';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../src/types/navigation';
 import { useNavigation } from '@react-navigation/native';
+import styles from './styles/ProjectPage.styles';
+import { Button } from '../components/Button';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'LoginPage'>;
-const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const ProjectPage = () => {
   const navigation = useNavigation<NavigationProp>();
   const [projectName, setProjectName] = useState('');
+  const [photoUri, setPhotoUri] = useState<string | null>(null);
+
+  const chooseImage = () => {
+    Alert.alert(
+      'Upload Photo',
+      'Choose an option',
+      [
+        { text: 'Camera', onPress: openCamera },
+        { text: 'Gallery', onPress: openGallery },
+        { text: 'Cancel', style: 'cancel' },
+      ],
+      { cancelable: true }
+    );
+  };
+
+  const openCamera = () => {
+    launchCamera(
+      {
+        mediaType: 'photo',
+        saveToPhotos: true,
+      },
+      response => {
+        if (response.assets && response.assets.length > 0) {
+          setPhotoUri(response.assets[0].uri || null);
+        }
+      }
+    );
+  };
+
+  const openGallery = () => {
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+      },
+      response => {
+        if (response.assets && response.assets.length > 0) {
+          setPhotoUri(response.assets[0].uri || null);
+        }
+      }
+    );
+  };
 
   const addProject = () => {
     if (projectName.trim() === '') {
@@ -32,30 +70,30 @@ const ProjectPage = () => {
       return;
     }
 
-    // Navigate to HomePage if input is valid
-    navigation.navigate('HomePage' as keyof RootStackParamList);
+    // Just navigate without saving anything
+    navigation.navigate('GroupPage' as keyof RootStackParamList);
     Alert.alert('Project Created', `Your project "${projectName}" has been created.`);
   };
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      {/* Header */}
       <ProjectInfoHeader title="Create Project" showSearch={false} />
-      {/* Main Content */}
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        {/* Photo Upload Section */}
         <View style={styles.photoSection}>
-          <View style={styles.photoRow}>
+          <TouchableOpacity onPress={chooseImage} style={styles.photoRow}>
             <View style={styles.circle}>
-              <Image
-                source={require('../../assets/icons/camera.png')}
-                style={styles.cameraIcon}
-              />
+              {photoUri ? (
+                <Image source={{ uri: photoUri }} style={styles.cameraIcon} />
+              ) : (
+                <Image
+                  source={require('../../assets/icons/camera.png')}
+                  style={styles.cameraIcon}
+                />
+              )}
             </View>
             <Text style={styles.addPhotoText}>Add Photo</Text>
-          </View>
+          </TouchableOpacity>
 
-          {/* Project Name Input */}
           <Text style={styles.heading}>Enter Project Name</Text>
           <View style={styles.searchContainer}>
             <TextInput
@@ -68,13 +106,10 @@ const ProjectPage = () => {
           </View>
         </View>
       </ScrollView>
-      <View style={styles.bottomContainer}>
-              <View style={styles.bottomBorder} />
-              <TouchableOpacity style={styles.fullButton} onPress={addProject}>
-                <Text style={styles.buttonText}>Create Project</Text>
-              </TouchableOpacity>
-            </View>
-      {/* <Button title="Create Project" onPress={addProject} /> */}
+
+     
+      <Button title="Create Project" onPress={addProject} />
+
     </SafeAreaView>
   );
 };

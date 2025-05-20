@@ -6,20 +6,23 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     backgroundColor: '#f5f5f5',
-    justifyContent: 'space-between',
-    paddingVertical: height * 0.05, // ~40px on standard phones
   },
   container: {
     backgroundColor: '#f5f5f5',
     alignItems: 'center',
-    paddingHorizontal: width * 0.04, // ~20px
-    marginTop: height * 0.12, // ~100px
+    paddingHorizontal: width * 0.04,
+  },
+  placeholderWrapper: {
+    marginTop: height * 0.1, // reduced from 0.12 to start below header
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: width * 0.04,
   },
   heading: {
     fontFamily: 'Poppins',
     fontWeight: '800',
-    fontSize: width * 0.055, // ~22px
-    lineHeight: width * 0.075, // ~30px
+    fontSize: width * 0.055,
+    lineHeight: width * 0.075,
     textAlign: 'center',
     color: '#000',
     marginBottom: height * 0.02,
@@ -27,11 +30,11 @@ const styles = StyleSheet.create({
   paragraph: {
     fontFamily: 'Poppins',
     fontWeight: '500',
-    fontSize: width * 0.035, // ~14px
-    lineHeight: width * 0.05, // ~21px
+    fontSize: width * 0.035,
+    lineHeight: width * 0.05,
     textAlign: 'center',
     color: '#333',
-    paddingHorizontal: width * 0.025, // ~10px
+    paddingHorizontal: width * 0.025,
   },
   buttonContainer: {
     paddingHorizontal: width * 0.1,
@@ -40,7 +43,7 @@ const styles = StyleSheet.create({
   },
   fullButton: {
     width: '100%',
-    height: height * 0.07, // ~56px
+    height: height * 0.07,
     borderRadius: 12,
     backgroundColor: '#6395EE',
     alignItems: 'center',
@@ -49,7 +52,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontFamily: 'NotoSans-SemiBold',
     fontWeight: Platform.OS === 'ios' ? '600' : '700',
-    fontSize: width * 0.045, // ~16px
+    fontSize: width * 0.045,
     color: 'white',
     textAlign: 'center',
   },
@@ -80,15 +83,13 @@ const styles = StyleSheet.create({
     color: '#000',
     fontWeight: '700',
   },
-  // Styling for the unread message count badge and time
   rightInfo: {
-    height: width * 0.12, // same as avatar height
+    height: width * 0.12,
     justifyContent: 'space-between',
     alignItems: 'flex-end',
     alignSelf: 'flex-start',
     paddingVertical: 2,
   },
-  
   unreadBadge: {
     backgroundColor: '#6395EE',
     borderRadius: 10,
@@ -98,7 +99,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 6,
   },
-  
   unreadCount: {
     fontFamily: 'NotoSans',
     fontSize: 11,
@@ -110,8 +110,6 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: '#777',
   },
-  
-  
 });
 
 export default styles;

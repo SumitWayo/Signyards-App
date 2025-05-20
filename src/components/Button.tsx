@@ -4,18 +4,20 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
-  Dimensions,
-  Platform,
 } from 'react-native';
 
-const { width, height } = Dimensions.get('window');
 import styles from './styles/Button.styles';
 
-export const Button = ({ title = 'Get Started' }) => {
+type ButtonProps = {
+  title?: string;
+  onPress?: () => void;
+};
+
+export const Button: React.FC<ButtonProps> = ({ title = 'Get Started', onPress }) => {
   return (
     <View style={styles.bottomContainer}>
       <View style={styles.bottomBorder} />
-      <TouchableOpacity style={styles.fullButton}>
+      <TouchableOpacity style={styles.fullButton} onPress={onPress} activeOpacity={0.7}>
         <Text style={styles.buttonText}>{title}</Text>
       </TouchableOpacity>
     </View>
