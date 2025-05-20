@@ -1,7 +1,8 @@
+
 import { StyleSheet, Dimensions, Platform } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
-
+const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 // ✅ Add types to percentage parameters
 const wp = (percentage: number): number => (width * percentage) / 100;
 const hp = (percentage: number): number => (height * percentage) / 100;
@@ -150,6 +151,18 @@ const styles = StyleSheet.create({
   docMeta: {
     fontSize: wp(3.2),
     color: 'blue',
+  },
+    arrowWrapper: {
+    width: screenWidth * 0.06,
+    height: screenWidth * 0.06,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  arrowIcon: {
+    width: screenWidth * 0.06,
+    height: screenWidth * 0.06,
+    resizeMode: 'contain',
   },
 });
 

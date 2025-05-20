@@ -14,5 +14,12 @@ export type RootStackParamList = {
     ProjectInfoPage:undefined;
     MediaPage:undefined;
     Header:undefined;
+    UpdatePage:undefined;
+    UserProfilePage:undefined;
+    MentionPage:undefined;
+    Project:undefined;
+    ListPage:undefined
+    
+    
   };
   

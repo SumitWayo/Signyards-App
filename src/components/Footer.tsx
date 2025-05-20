@@ -1,37 +1,32 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
-import styles from "./styles/Footer.styles"
-import useTypedNavigation from '../hooks/useTypedNavigation';
+import React from 'react';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import styles from './styles/Footer.styles';
+import { useFooter } from '../context/FooterContext'; // ✅ Import context
 
 const Footer = () => {
-  const navigation = useTypedNavigation<'Footer'>();
+  const { selectedItem, setSelectedItem } = useFooter(); // ✅ Use context values
 
-  const [selectedItem, setSelectedItem] = useState(null);
-
-  const handlePress = (item: any) => {
+  const handlePress = (item: string) => {
     setSelectedItem(item);
-    if(item=='dms'){
-      navigation.navigate("MemberPage")
-    }
+    // Removed navigation calls: rendering happens in parent based on selectedItem
   };
 
-  const getItemStyle = (item: any) => {
+  const getItemStyle = (item: string) => {
     return item === selectedItem ? styles.selectedItem : null;
   };
 
   return (
     <View style={styles.footer}>
-      
       <View style={styles.iconContainer}>
         <TouchableOpacity
           style={[styles.iconItem, getItemStyle('projects')]}
-          onPress={() => navigation.navigate('ProjectPage')}
+          onPress={() => handlePress('projects')}
         >
           <Image
             source={require('../../assets/icons/projects.png')}
-            style={[styles.icon, getItemStyle('projects') && styles.selectedIcon]}
+            style={[styles.icon, selectedItem === 'projects' && styles.selectedIcon]}
           />
-          <Text style={[styles.label, getItemStyle('projects') && styles.selectedLabel]}>
+          <Text style={[styles.label, selectedItem === 'projects' && styles.selectedLabel]}>
             Projects
           </Text>
         </TouchableOpacity>
@@ -42,9 +37,9 @@ const Footer = () => {
         >
           <Image
             source={require('../../assets/icons/dms.png')}
-            style={[styles.icon, getItemStyle('dms') && styles.selectedIcon]}
+            style={[styles.icon, selectedItem === 'dms' && styles.selectedIcon]}
           />
-          <Text style={[styles.label, getItemStyle('dms') && styles.selectedLabel]}>
+          <Text style={[styles.label, selectedItem === 'dms' && styles.selectedLabel]}>
             DMs
           </Text>
         </TouchableOpacity>
@@ -55,22 +50,22 @@ const Footer = () => {
         >
           <Image
             source={require('../../assets/icons/mentions.png')}
-            style={[styles.icon, getItemStyle('mention') && styles.selectedIcon]}
+            style={[styles.icon, selectedItem === 'mention' && styles.selectedIcon]}
           />
-          <Text style={[styles.label, getItemStyle('mention') && styles.selectedLabel]}>
+          <Text style={[styles.label, selectedItem === 'mention' && styles.selectedLabel]}>
             Mention
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={[styles.iconItem, getItemStyle('updates')]}
-          onPress={() => navigation.navigate('UpdatePage')}
+          onPress={() => handlePress('updates')}
         >
           <Image
             source={require('../../assets/icons/updates.png')}
-            style={[styles.icon, getItemStyle('updates') && styles.selectedIcon]}
+            style={[styles.icon, selectedItem === 'updates' && styles.selectedIcon]}
           />
-          <Text style={[styles.label, getItemStyle('updates') && styles.selectedLabel]}>
+          <Text style={[styles.label, selectedItem === 'updates' && styles.selectedLabel]}>
             Updates
           </Text>
         </TouchableOpacity>
@@ -78,6 +73,5 @@ const Footer = () => {
     </View>
   );
 };
-
 
 export default Footer;

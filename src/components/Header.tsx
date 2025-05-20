@@ -55,7 +55,7 @@ const Header: React.FC<HeaderProps> = ({ title = 'HomePage', showSearch = true, 
         {/* Add Person Icon - top-right */}
         <TouchableOpacity style={styles.addPersonIconContainer} onPress={() => navigation.navigate('ProjectPage')}>
           <Image
-            source={require('../../assets/icons/addperson.png')}
+            source={require('../../assets/icons/addproject.png')}
             style={styles.addPersonIcon}
           />
         </TouchableOpacity>

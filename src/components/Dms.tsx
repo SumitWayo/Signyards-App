@@ -35,7 +35,7 @@ const people = [
 ];
 
 // Set this to false to test the NoMessagesPlaceholder
-const hasPeople = people.length > 0;
+const hasPeople = people.length > 5;
 
 const Dms = () => {
   return (
