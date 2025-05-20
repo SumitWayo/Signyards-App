@@ -75,4 +75,37 @@ export default StyleSheet.create({
     marginLeft: screenWidth * 0.02,
     tintColor: '#888', // optional: color tint for the icon
   },
+
+  bottomContainer: {
+    paddingHorizontal: screenWidth * 0.05,
+    paddingBottom: screenWidth * 0.04,
+    backgroundColor: 'white',
+    justifyContent: 'flex-end', // Ensure content is aligned to the bottom if needed
+  }, 
+
+  fullButton: {
+    width: '100%',
+    height: screenHeight * 0.07,
+    borderRadius: 12,
+    backgroundColor: '#6395EE',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: screenHeight * 0.02, // Ensure there's spacing between the button and other elements
+  },
+  
+  buttonText: {
+    fontFamily: 'NotoSans-SemiBold',
+    fontWeight: '600',
+    fontSize: screenWidth * 0.05,  // Larger font for better emphasis
+    color: 'white',
+    textAlign: 'center',
+  },
+  
+  bottomBorder: {
+    width: '100%',
+    height: 1,
+    backgroundColor: '#eeeeee',
+    marginBottom: screenHeight * 0.025,
+  },
+  
 });

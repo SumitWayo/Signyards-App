@@ -11,6 +11,7 @@ import {
   TouchableOpacity, // ✅ Added this import
 } from 'react-native';
 import styles from './styles/Header.styles';
+import useTypedNavigation from '../hooks/useTypedNavigation';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
@@ -21,13 +22,15 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ title = 'HomePage', showSearch = true, onAddPersonPress }) => {
+  const navigation = useTypedNavigation<'Header'>();
+
   return (
     <SafeAreaView>
       <View style={styles.container}>
         {/* Circle - top-left */}
-        <View style={styles.circle}>
-          <Text style={styles.letter}>A</Text>
-        </View>
+        <TouchableOpacity style={styles.circle} onPress={() => navigation.navigate('UserProfilePage')}>
+  <Text style={styles.letter}>A</Text>
+</TouchableOpacity>
 
         {/* Centered Title */}
         <View style={styles.titleContainer}>
@@ -50,7 +53,7 @@ const Header: React.FC<HeaderProps> = ({ title = 'HomePage', showSearch = true, 
         )}
 
         {/* Add Person Icon - top-right */}
-        <TouchableOpacity style={styles.addPersonIconContainer} onPress={onAddPersonPress}>
+        <TouchableOpacity style={styles.addPersonIconContainer} onPress={() => navigation.navigate('ProjectPage')}>
           <Image
             source={require('../../assets/icons/addperson.png')}
             style={styles.addPersonIcon}

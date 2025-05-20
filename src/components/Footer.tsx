@@ -1,22 +1,17 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import styles from "./styles/Footer.styles"
-
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../src/types/navigation';
-import { useNavigation } from '@react-navigation/native';
-
-type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Footer'>;
+import useTypedNavigation from '../hooks/useTypedNavigation';
 
 const Footer = () => {
-  const navigation = useNavigation<NavigationProp>();
+  const navigation = useTypedNavigation<'Footer'>();
 
   const [selectedItem, setSelectedItem] = useState(null);
 
   const handlePress = (item: any) => {
     setSelectedItem(item);
     if(item=='dms'){
-      navigation.navigate("MemberPage" as keyof RootStackParamList)
+      navigation.navigate("MemberPage")
     }
   };
 
@@ -30,7 +25,7 @@ const Footer = () => {
       <View style={styles.iconContainer}>
         <TouchableOpacity
           style={[styles.iconItem, getItemStyle('projects')]}
-          onPress={() => handlePress('projects')}
+          onPress={() => navigation.navigate('ProjectPage')}
         >
           <Image
             source={require('../../assets/icons/projects.png')}
@@ -69,7 +64,7 @@ const Footer = () => {
 
         <TouchableOpacity
           style={[styles.iconItem, getItemStyle('updates')]}
-          onPress={() => handlePress('updates')}
+          onPress={() => navigation.navigate('UpdatePage')}
         >
           <Image
             source={require('../../assets/icons/updates.png')}

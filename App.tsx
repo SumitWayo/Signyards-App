@@ -24,7 +24,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="AllScreens"
+        initialRouteName="LandingPage"
         screenOptions={{ headerShown: false }} // Hides header for all screens
       >
         <Stack.Screen name="AllScreens" component={AllScreensPage} />
