@@ -8,14 +8,21 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import styles from './styles/ProjectInfoHeader.styles';
+import useTypedNavigation from '../hooks/useTypedNavigation';
+
 
 const ProjectInfoHeader = ({ title = 'HomePage', showSearch = true }) => {
+  const navigation = useTypedNavigation<'Back'>();
+
   return (
     <SafeAreaView>
       <View style={[styles.container, { paddingBottom: showSearch ? styles.container.paddingBottom : 0 }]}>
         {/* Top Row: Back Arrow + Title */}
         <View style={styles.headerRow}>
-          <TouchableOpacity style={styles.arrowWrapper} >
+          <TouchableOpacity 
+             style={styles.arrowWrapper} 
+             onPress={() => navigation.goBack()}
+          >
             <Image
               source={require('../../assets/icons/backarrow.png')}
               style={styles.arrowIcon}

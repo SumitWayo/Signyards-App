@@ -10,6 +10,9 @@ export type RootStackParamList = {
     MemberPage:undefined;
     Dms:undefined;
     TeamMemberPage:undefined;
-
+    Back:undefined;
+    ProjectInfoPage:undefined;
+    MediaPage:undefined;
+    Header:undefined;
   };
   

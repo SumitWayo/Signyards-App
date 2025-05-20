@@ -19,20 +19,15 @@ const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 const TeamMemberPage = () => {
   const navigation = useTypedNavigation<'TeamMemberPage'>();
 
+  function addTeamMember(){
+    navigation.navigate('MemberPage');
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
       {/* Header */}
-     <ProjectInfoHeader showSearch={false}/>
+      <ProjectInfoHeader title='' showSearch={false}/>
       <View style={styles.header}>
-        <TouchableOpacity 
-          style={styles.arrowContainer} 
-          onPress={() => navigation.goBack()}
-        >
-          <Image
-            source={require('../../assets/Images/back.png')}
-            style={styles.arrowIcon}
-          />
-        </TouchableOpacity>
         <Text style={styles.title}>Add Member</Text>
       </View>
       {/* Main Content */}
@@ -73,8 +68,13 @@ const TeamMemberPage = () => {
           </View>
       </ScrollView>
 
-      <Button title="Add" />
-    </SafeAreaView>
+      <View style={styles.bottomContainer}>
+              <View style={styles.bottomBorder} />
+              <TouchableOpacity style={styles.fullButton} onPress={addTeamMember}>
+                <Text style={styles.buttonText}>Add</Text>
+              </TouchableOpacity>
+            </View>
+                </SafeAreaView>
   );
 };
 

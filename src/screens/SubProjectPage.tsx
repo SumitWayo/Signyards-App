@@ -77,8 +77,6 @@ const SubProjectPage = () => {
           
 
         </View> */}
-
-      <Button title="Create Sub-Project" />
       <View style={styles.bottomContainer}>
               <View style={styles.bottomBorder} />
               <TouchableOpacity style={styles.fullButton} onPress={addProject}>
