@@ -8,6 +8,8 @@ import {
   Image,
 } from 'react-native';
 import styles from './styles/MediaPage.styles';
+import ProjectInfoHeader from '../components/ProjectInfoPageHeader';
+import useTypedNavigation from '../hooks/useTypedNavigation';
 
 type MediaItem = {
   id: number;
@@ -25,6 +27,8 @@ const MediaPage = () => {
   const [selectedTab, setSelectedTab] = useState<'Media' | 'Links' | 'Docs'>(
     'Media'
   );
+  const navigation = useTypedNavigation<'MediaPage'>();
+
 
   const mediaItems: MediaItem[] = [
     {
@@ -192,7 +196,7 @@ const MediaPage = () => {
                 {items.map((item) => (
                   <View key={item.id} style={styles.linkItem}>
                     <Image
-            source={require('../../assets/Images/pdf.png')}
+            source={require('../../assets/icons/pdf.png')}
             style={styles.mediaItem}
                     />
                     <View style={styles.linkContent}>
@@ -217,12 +221,8 @@ const MediaPage = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity style={styles.iconWrapper}>
-          <Image
-            source={require('../../assets/Images/back.png')}
-            style={styles.backIcon}
-          />
-        </TouchableOpacity>
+      <ProjectInfoHeader title="" showSearch={false} />
+
 
         <View style={styles.tabsWrapper}>
           {['Media', 'Links', 'Docs'].map((tab) => (

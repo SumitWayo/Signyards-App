@@ -14,12 +14,12 @@ import {
 } from 'react-native';
 import { Button } from '../components/Button';
 import styles from './styles/ProjectPage.styles';
+import ProjectInfoHeader from '../components/ProjectInfoPageHeader';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../src/types/navigation';
 import { useNavigation } from '@react-navigation/native';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'LoginPage'>;
-
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const ProjectPage = () => {
@@ -40,16 +40,7 @@ const ProjectPage = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.arrowContainer}>
-          <Image
-            source={require('../../assets/Images/back.png')}
-            style={styles.arrowIcon}
-          />
-        </TouchableOpacity>
-        <Text style={styles.title}>Create Project</Text>
-      </View>
-
+      <ProjectInfoHeader title="Create Project" showSearch={false} />
       {/* Main Content */}
       <ScrollView contentContainerStyle={styles.scrollContent}>
         {/* Photo Upload Section */}
@@ -57,7 +48,7 @@ const ProjectPage = () => {
           <View style={styles.photoRow}>
             <View style={styles.circle}>
               <Image
-                source={require('../../assets/Images/camera.png')}
+                source={require('../../assets/icons/camera.png')}
                 style={styles.cameraIcon}
               />
             </View>

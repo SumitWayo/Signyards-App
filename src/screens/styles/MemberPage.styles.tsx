@@ -67,6 +67,16 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: height * 0.01,
   },
+  bottomSheet: {
+    height: screenHeight * 0.15, // 15% of screen height
+    backgroundColor: '#fff',
+    paddingHorizontal: width * 0.06,
+    paddingVertical: height * 0.02,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   role: {
     fontSize: 12,
     color: '#888', // light gray for subtle appearance
@@ -92,6 +102,49 @@ const styles = StyleSheet.create({
   // Styling for the unread message count badge and time
 
   
+  adminStatus: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    marginRight: 20,
+    color:"blue"
+  },
+  bottomSheetOverlay: {
+  flex: 1,
+  justifyContent: 'flex-end',
+  backgroundColor: 'rgba(0,0,0,0.4)',
+},
+
+bbottomSheet: {
+  backgroundColor: '#fff',
+  paddingHorizontal: width * 0.06,
+  paddingTop: height * 0.02,
+  paddingBottom: height * 0.03,
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+  alignItems: 'center',
+  justifyContent: 'center',
+},
+
+bottomSheetOption: {
+  width: '100%',
+  paddingVertical: height * 0.018,
+  alignItems: 'center',
+  borderRadius: 8,
+},
+
+bottomSheetOptionText: {
+  fontSize: width * 0.045,
+  fontFamily: 'NotoSans',
+  fontWeight: '600',
+  color: '#000',
+},
+
+bottomSheetDivider: {
+  height: 1,
+  width: '100%',
+  backgroundColor: '#ddd',
+  marginVertical: height * 0.01,
+},
 
   
   

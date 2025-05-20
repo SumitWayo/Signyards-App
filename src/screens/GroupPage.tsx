@@ -17,9 +17,13 @@ import {
 
 const { width, height } = Dimensions.get('window');
 import styles from './styles/GroupPage.styles';
+import ProjectInfoHeader from '../components/ProjectInfoPageHeader';
+import useTypedNavigation from '../hooks/useTypedNavigation';
+
+
 const GroupPage = () => {
   const labels = ['Electricals', 'Plywood home', 'Sign board jabalpur'];
-
+  const navigation = useTypedNavigation<'GroupPage'>();
   const [messages, setMessages] = useState([
     { id: '1', text: 'Hi, how can I help you?', isUser: false },
     { id: '2', text: 'I want to inquire about plywood sheets.', isUser: true },
@@ -58,12 +62,7 @@ type Message = {
         <View style={styles.container}>
           {/* Top row: Back Arrow, Center Content, Add Icon */}
           <View style={styles.topRow}>
-            <TouchableOpacity style={styles.backButton}>
-              <Image
-                source={require('../../assets/Images/back.png')}
-                style={styles.arrowImage}
-              />
-            </TouchableOpacity>
+          <ProjectInfoHeader title="" showSearch={false} />
 
             <View style={styles.centerContent}>
               <Image
@@ -72,11 +71,17 @@ type Message = {
               />
               <Text style={styles.title}>Pune Interior</Text>
             </View>
-
             <TouchableOpacity>
+              <Image
+                source={require('../../assets/icons/addpeople.png')}
+                style={styles.addIcon}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity  onPress={() => navigation.navigate('SubProjectPage')}>
               <Image
                 source={require('../../assets/Images/add.png')}
                 style={styles.addIcon}
+                
               />
             </TouchableOpacity>
           </View>
