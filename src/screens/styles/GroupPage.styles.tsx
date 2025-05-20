@@ -78,16 +78,7 @@ export default StyleSheet.create({ safeArea: {
   chatList: {
     paddingBottom: 100,
   },
-  messageBubble: {
-    maxWidth: '80%',
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 10,
-  },
-  messageText: {
-    fontSize: 14,
-    color: '#000',
-  },
+
   inputContainer: {
     position: 'absolute',
     bottom: 0,
@@ -98,11 +89,64 @@ export default StyleSheet.create({ safeArea: {
     borderTopWidth: 1,
     borderColor: '#ccc',
   },
-  textInput: {
-    backgroundColor: '#f2f2f2',
-    borderRadius: 20,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    fontSize: 14,
-  },
+  inputWrapper: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  paddingHorizontal: 10,
+  paddingVertical: 8,
+  backgroundColor: '#fff',
+},
+
+textInput: {
+  flex: 1,
+  fontSize: 16,
+  paddingHorizontal: 10,
+  paddingVertical: Platform.OS === 'ios' ? 10 : 8,
+  backgroundColor: '#F0F0F0',
+  borderRadius: 20,
+  marginHorizontal: 8,
+},
+
+icon: {
+  width: 24,
+  height: 24,
+  marginHorizontal: 4,
+},
+icontwo: {
+  width: 18,
+  height: 24,
+  marginHorizontal: 4,
+},
+messageBubble: {
+  maxWidth: '80%',
+  borderRadius: 12,
+  marginVertical: 6,
+  padding: 10,
+  position: 'relative',
+},
+
+messageText: {
+  fontSize: 14,
+  color: '#000',
+},
+
+metaContainer: {
+  flexDirection: 'row',
+  justifyContent: 'flex-end',
+  alignItems: 'center',
+  marginTop: 4,
+},
+
+timestamp: {
+  fontSize: 10,
+  color: '#888',
+  marginRight: 4,
+},
+
+tickIcon: {
+  width: 16,
+  height: 14,
+  tintColor: '#4CAF50',
+},
+
 });
