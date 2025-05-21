@@ -1,19 +1,26 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     backgroundColor: '#f5f5f5',
     justifyContent: 'space-between',
-    paddingVertical: screenHeight * 0.05, // ~5% vertical padding
+    paddingVertical: screenHeight * 0.02, // ~5% vertical padding
   },
   container: {
     backgroundColor: '#f5f5f5',
     alignItems: 'center',
     paddingHorizontal: screenWidth * 0.04, // ~4% horizontal padding
-    marginTop: screenHeight * 0.12, // ~12% top margin
+  },
+   containerTwo: {
+    backgroundColor: '#f5f5f5',
+    alignItems: 'center',
+    paddingHorizontal: screenWidth * 0.04, // ~4% horizontal padding
+        paddingVertical: screenHeight * 0.07, // ~5% vertical padding
+
   },
   content: {
     alignItems: 'center',
@@ -112,6 +119,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 16,
   },
+  
 });
 
 export default styles;

@@ -10,7 +10,6 @@ const UpdatePage = () => {
 
   return (
     <View style={{ backgroundColor: '#f5f5f5', flex: 1 }}>
-      <Header title="Fitouts" showSearch={false} />
 <View style={{paddingTop:212}}>
       <NoMessagesPlaceholder
   heading="No Project Updates Yet"
@@ -18,7 +17,6 @@ const UpdatePage = () => {
 />
 </View>
 
-      <Footer />
     </View>
   );
 };

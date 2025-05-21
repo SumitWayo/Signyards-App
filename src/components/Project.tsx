@@ -1,7 +1,6 @@
 import React from 'react';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../src/types/navigation';
-import { useNavigation } from '@react-navigation/native';
+import useTypedNavigation from '../hooks/useTypedNavigation';
+
 import {
   View,
   Text,
@@ -13,7 +12,6 @@ import {
 import styles from './styles/Project.styles';
 import NoMessagesPlaceholder from './NoMessagePlaceholder';
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'LoginPage'>;
 
 type PersonType = {
   id: number;
@@ -24,7 +22,7 @@ type PersonType = {
 };
 
 const Project = () => {
-  const navigation = useNavigation<NavigationProp>();
+  const navigation = useTypedNavigation<'ProjectPage'>();
 
   const haveList = false;
 
@@ -52,7 +50,7 @@ const Project = () => {
       {haveList && people.length > 0 ? (
         <View style={styles.container}>
           {people.map((person) => (
-            <TouchableOpacity key={person.id} style={styles.personRow}>
+            <TouchableOpacity key={person.id} style={styles.personRow} onPress={() => navigation.navigate('GroupPage')}>
               <View style={styles.personInfo}>
                 <Image source={{ uri: person.image }} style={styles.avatar} />
                 <View>
@@ -86,4 +84,4 @@ const Project = () => {
   );
 };
 
-export default Project;
+export default Project;

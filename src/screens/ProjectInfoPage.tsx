@@ -43,7 +43,7 @@ const ProjectInfoPage = () => {
   </View>
 </TouchableOpacity>
         
-<TouchableOpacity style={styles.infoBox} onPress={() => navigation.navigate('ListPage')}>
+<TouchableOpacity style={styles.infoBox} onPress={() => navigation.navigate('ProjectPage')}>
   <Text style={styles.leftText}>Edit Project</Text>
   <View style={styles.rightContainer}>
     <Image
@@ -52,7 +52,7 @@ const ProjectInfoPage = () => {
     />
   </View>
 </TouchableOpacity>
-<TouchableOpacity style={styles.infoBox} onPress={() => navigation.navigate('ListPage')}>
+<TouchableOpacity style={styles.infoBox} onPress={() => navigation.navigate('SubProjectPage')}>
   <Text style={styles.leftText}>Edit Sub Project</Text>
   <View style={styles.rightContainer}>
     <Image
