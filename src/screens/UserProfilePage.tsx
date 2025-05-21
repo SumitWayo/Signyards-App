@@ -1,19 +1,73 @@
-import React from 'react';
-import { View, Image, Text, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import ProjectInfoHeader from '../components/ProjectInfoPageHeader';
 import { Button } from '../components/Button';
-import styles from "../screens/styles/UserProfile.styles";
+import styles from '../screens/styles/UserProfile.styles';
 
 const UserProfilePage = () => {
+  const [photoUri, setPhotoUri] = useState<string | null>(null);
+
+  const chooseImage = () => {
+    Alert.alert(
+      'Change Profile Photo',
+      'Choose an option',
+      [
+        { text: 'Camera', onPress: openCamera },
+        { text: 'Gallery', onPress: openGallery },
+        { text: 'Cancel', style: 'cancel' },
+      ],
+      { cancelable: true }
+    );
+  };
+
+  const openCamera = () => {
+    launchCamera(
+      {
+        mediaType: 'photo',
+        saveToPhotos: true,
+      },
+      response => {
+        if (response.assets && response.assets.length > 0) {
+          setPhotoUri(response.assets[0].uri || null);
+        }
+      }
+    );
+  };
+
+  const openGallery = () => {
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+      },
+      response => {
+        if (response.assets && response.assets.length > 0) {
+          setPhotoUri(response.assets[0].uri || null);
+        }
+      }
+    );
+  };
+
   return (
     <View style={styles.container}>
       <ProjectInfoHeader title="Profile" showSearch={false} />
 
       {/* Profile Image with Edit Icon */}
-      <View style={styles.profileContainer}>
+      <TouchableOpacity onPress={chooseImage} style={styles.profileContainer}>
         <View style={styles.circle}>
           <Image
-            source={require('../../assets/Images/man3.jpeg')}
+            source={
+              photoUri
+                ? { uri: photoUri }
+                : require('../../assets/Images/man3.jpeg')
+            }
             style={styles.image}
             resizeMode="cover"
           />
@@ -26,7 +80,7 @@ const UserProfilePage = () => {
             resizeMode="contain"
           />
         </View>
-      </View>
+      </TouchableOpacity>
 
       {/* Phone Number */}
       <Text style={styles.phoneNumber}>+91 8877665544</Text>
