@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   View,
   SafeAreaView,
@@ -11,14 +11,15 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   TouchableWithoutFeedback,
-  
 } from 'react-native';
 
-import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { useNavigation, useRoute, RouteProp, NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from '../../src/types/navigation';
+import { useProjectContext } from '../context/ProjectContext'; // make sure this exists and provides projects
 import styles from './styles/GroupPage.styles';
 import ExtraOptionsPanel from '../components/ExtraOptionsPanel';
 
+type GroupPageRouteProp = RouteProp<RootStackParamList, 'GroupPage'>;
 type GroupPageNavigationProp = NavigationProp<RootStackParamList, 'GroupPage'>;
 
 type Message = {
@@ -30,6 +31,16 @@ type Message = {
 
 const GroupPage = () => {
   const navigation = useNavigation<GroupPageNavigationProp>();
+  const route = useRoute<GroupPageRouteProp>();
+
+  const { projectId } = route.params;
+  const { projects } = useProjectContext();
+
+  // Get project name from context by projectId
+  const projectName = useMemo(() => {
+    const project = projects.find((p) => p.id === projectId);
+    return project ? project.name : 'Unknown Project';
+  }, [projects, projectId]);
 
   const labels = ['Electricals', 'Plywood home', 'Sign board jabalpur'];
 
@@ -62,13 +73,13 @@ const GroupPage = () => {
   };
 
   const navigateToSubProjectPage = () => {
-    navigation.navigate('SubProjectPage');
+    navigation.navigate('SubProjectPage', { projectId });
   };
-   const navigateToMediaList = () => {
-    navigation.navigate('ProjectInfoPage');
+  const navigateToMediaList = () => {
+    navigation.navigate('ProjectInfoPage', { projectId });
   };
-   const navigateToMemberPage = () => {
-    navigation.navigate('MemberPage');
+  const navigateToMemberPage = () => {
+    navigation.navigate('MemberPage', { projectId });
   };
 
   const renderItem = ({ item }: { item: Message }) => (
@@ -100,9 +111,8 @@ const GroupPage = () => {
         <View style={styles.container}>
           {/* Top row */}
           <View style={styles.topRow}>
-            <TouchableOpacity style={styles.backButton}              onPress={() => navigation.goBack()}>
-              <Image 
-              
+            <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+              <Image
                 source={require('../../assets/icons/backarrow.png')}
                 style={styles.arrowImage}
               />
@@ -113,7 +123,7 @@ const GroupPage = () => {
                 source={require('../../assets/Images/man3.jpeg')}
                 style={styles.userImage}
               />
-              <Text style={styles.title}>Pune Interior</Text>
+              <Text style={styles.title}>{projectName}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={navigateToMemberPage}>
@@ -123,7 +133,7 @@ const GroupPage = () => {
               />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={navigateToSubProjectPage} >
+            <TouchableOpacity onPress={navigateToSubProjectPage}>
               <Image
                 source={require('../../assets/icons/plus.png')}
                 style={styles.addIcon}
@@ -212,4 +222,4 @@ const GroupPage = () => {
   );
 };
 
-export default GroupPage;   
+export default GroupPage;

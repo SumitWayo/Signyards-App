@@ -13,10 +13,11 @@ import Geolocation from '@react-native-community/geolocation';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import styles from './styles/ExtraoptionalPanel.styles';
 
+
 const options = [
   { label: 'Photos', icon: require('../../assets/icons/gallery.png'), action: 'gallery' },
   { label: 'Camera', icon: require('../../assets/icons/cam.png'), action: 'camera' },
-  { label: 'Location', icon: require('../../assets/icons/map.png'), action: 'location' },
+  // { label: 'Location', icon: require('../../assets/icons/map.png'), action: 'location' },
   { label: 'Contact', icon: require('../../assets/icons/contacts-book.png'), action: 'contact' },
   { label: 'Document', icon: require('../../assets/icons/doc.png'), action: 'document' },
 ];

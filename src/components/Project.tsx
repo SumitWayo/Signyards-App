@@ -1,58 +1,49 @@
 import React from 'react';
-import useTypedNavigation from '../hooks/useTypedNavigation';
-
 import {
   View,
   Text,
   TouchableOpacity,
   ScrollView,
   Image,
+  ActivityIndicator,
 } from 'react-native';
-
+import { useProjectContext } from '../context/ProjectContext';
+import useTypedNavigation from '../hooks/useTypedNavigation';
 import styles from './styles/Project.styles';
 import NoMessagesPlaceholder from './NoMessagePlaceholder';
 
-
-type PersonType = {
-  id: number;
-  name: string;
-  image: string;
-  unreadMessages: number;
-  time: string;
-};
-
 const Project = () => {
   const navigation = useTypedNavigation<'ProjectPage'>();
+  const { projects, loading } = useProjectContext();
 
-  const haveList = false;
-
-  const people: PersonType[] = haveList
-    ? [
-        {
-          id: 1,
-          name: 'Pune Extension',
-          image: 'https://randomuser.me/api/portraits/men/1.jpg',
-          unreadMessages: 3,
-          time: '10:30 AM',
-        },
-        {
-          id: 2,
-          name: ' Smith Work',
-          image: 'https://randomuser.me/api/portraits/women/2.jpg',
-          unreadMessages: 0,
-          time: 'Yesterday',
-        },
-      ]
-    : [];
+  if (loading) {
+    return (
+      <View
+        style={[
+          styles.container,
+          { justifyContent: 'center', alignItems: 'center', flex: 1 },
+        ]}
+      >
+        <ActivityIndicator size="large" color="#000" />
+      </View>
+    );
+  }
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
-      {haveList && people.length > 0 ? (
+      {projects.length > 0 ? (
         <View style={styles.container}>
-          {people.map((person) => (
-            <TouchableOpacity key={person.id} style={styles.personRow} onPress={() => navigation.navigate('GroupPage')}>
+          {projects.map((person) => (
+            <TouchableOpacity
+              key={person.id}
+              style={styles.personRow}
+              onPress={() => navigation.navigate('GroupPage', { projectId: person.id })}
+            >
               <View style={styles.personInfo}>
-                <Image source={{ uri: person.image }} style={styles.avatar} />
+                <Image
+                  source={require('../../assets/Images/man3.jpeg')}
+                  style={styles.avatar}
+                />
                 <View>
                   <Text style={styles.name}>{person.name}</Text>
                 </View>
@@ -60,9 +51,7 @@ const Project = () => {
               <View style={styles.rightInfo}>
                 {person.unreadMessages > 0 && (
                   <View style={styles.unreadBadge}>
-                    <Text style={styles.unreadCount}>
-                      {person.unreadMessages}
-                    </Text>
+                    <Text style={styles.unreadCount}>{person.unreadMessages}</Text>
                   </View>
                 )}
                 <Text style={styles.time}>{person.time}</Text>
@@ -84,4 +73,4 @@ const Project = () => {
   );
 };
 
-export default Project;
+export default Project;
