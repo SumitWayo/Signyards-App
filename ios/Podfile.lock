@@ -1332,6 +1332,59 @@ PODS:
     - React-jsiexecutor
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
+<<<<<<< Updated upstream
+=======
+  - react-native-geolocation (3.4.0):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-hermes
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
+  - react-native-image-picker (8.2.1):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-hermes
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
+  - react-native-rsa-native (2.0.5):
+    - React
+>>>>>>> Stashed changes
   - react-native-safe-area-context (5.4.0):
     - DoubleConversion
     - glog
@@ -1972,6 +2025,12 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
+<<<<<<< Updated upstream
+=======
+  - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
+  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
+  - react-native-rsa-native (from `../node_modules/react-native-rsa-native`)
+>>>>>>> Stashed changes
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-oscompat (from `../node_modules/react-native/ReactCommon/oscompat`)
@@ -2091,6 +2150,15 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
+<<<<<<< Updated upstream
+=======
+  react-native-geolocation:
+    :path: "../node_modules/@react-native-community/geolocation"
+  react-native-image-picker:
+    :path: "../node_modules/react-native-image-picker"
+  react-native-rsa-native:
+    :path: "../node_modules/react-native-rsa-native"
+>>>>>>> Stashed changes
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-NativeModulesApple:
@@ -2188,6 +2256,7 @@ SPEC CHECKSUMS:
   React-FabricComponents: 1d0a00e69b45174c53826fd501cc3ade250e47d8
   React-FabricImage: 298580ce571206873837a44f447cd1269f5745ff
   React-featureflags: f7aac85238436b9c5c50056859ff234542fa535a
+<<<<<<< Updated upstream
   React-featureflagsnativemodule: 952a24249bc9df5d22b231aa5f4fba78e87611cb
   React-graphics: 5b92524e0c62d1d1be676883b2c3f2e20743c65f
   React-hermes: a6f231430891844027129f0c694e286f16385eff
@@ -2205,6 +2274,28 @@ SPEC CHECKSUMS:
   React-microtasksnativemodule: 32f7f13d65525e981e9a5b28cebad7d10e0ff711
   react-native-safe-area-context: 00d03dc688ba86664be66f9e3f203fc7d747d899
   React-NativeModulesApple: 6d750bb9829fdf0f02c56e9a68cbb390e1f5de25
+=======
+  React-featureflagsnativemodule: 83299092a3327e4221f964f69b7abb48c2925680
+  React-graphics: 6c5a692ec20f47834b72020ebb51e203e76c0486
+  React-hermes: 101762c828f1f9c9a15010a335bf58b8576bd24e
+  React-idlecallbacksnativemodule: 3451bbbcfa4c85079370cde0cb39cf99d024728d
+  React-ImageManager: a60f8e589e3a409c433c7eddc0a53ec0fa73fcfa
+  React-jserrorhandler: 5c5a6b0a0e69c61a54645bf753fddd5f2c987740
+  React-jsi: 63c14490e7b06cdae41f8039deb5366611185c15
+  React-jsiexecutor: beda562d830c3512c8fd747541bd05e7d4f8a962
+  React-jsinspector: b620391b0e6f00a59b22fb2d69a9125ce2c0ba6a
+  React-jsinspectortracing: 8ee9c4e016208f0ec90c9beb22c8898efc99a4a4
+  React-jsitooling: 0518d7e70565a386a08d81c0ef24913e40113d37
+  React-jsitracing: 72b812a474307e315d47cbe32efb5d705be8fc98
+  React-logger: cc55ca6e50aeb31216c0a9dec30871cac776ef9a
+  React-Mapbuffer: 8df5296f9d9a61f980d293b55026cfebcd8dfb0a
+  React-microtasksnativemodule: c8ed30f8ec30affbc73411c54207bd67b1125bbb
+  react-native-geolocation: d43962eb0be1b0056ba5c1f95e94fb7907494268
+  react-native-image-picker: db0b3e3c7ae57680876318d4f42e7dbedd72244a
+  react-native-rsa-native: a7931cdda1f73a8576a46d7f431378c5550f0c38
+  react-native-safe-area-context: 562163222d999b79a51577eda2ea8ad2c32b4d06
+  React-NativeModulesApple: 8a465be9a58afc56f48c1322331ffbdecd3d4877
+>>>>>>> Stashed changes
   React-oscompat: 74eb4badd12e93899f37a5dbb03d8a638011a292
   React-perflogger: 53be4c46645bbccec870dd82a24764aca9bae4c2
   React-performancetimeline: 2d5bde46eb399631b247cc705bb198959bd80065

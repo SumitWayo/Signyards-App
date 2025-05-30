@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React from 'react';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../src/types/navigation';
@@ -5,6 +6,10 @@ import { useNavigation } from '@react-navigation/native';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'LoginPage'>;
 
+=======
+import React, { useEffect } from 'react';
+import useTypedNavigation from '../hooks/useTypedNavigation';
+>>>>>>> Stashed changes
 import {
   View,
   Text,
@@ -14,6 +19,7 @@ import {
 } from 'react-native';
 import styles from './styles/Project.styles';
 
+<<<<<<< Updated upstream
 const people = [
   { 
     id: 1, 
@@ -40,6 +46,38 @@ const people = [
 
 const Project = () => {
   const navigation = useNavigation<NavigationProp>();
+=======
+type PersonType = {
+  id: number;
+  name: string;
+  image: string;
+  unreadMessages: number;
+  time: string;
+};
+
+const Project = () => {
+  const navigation = useTypedNavigation<'ProjectPage'>();
+  const haveList = false;
+
+  const people: PersonType[] = haveList
+    ? [
+        {
+          id: 1,
+          name: 'Pune Extension',
+          image: 'https://randomuser.me/api/portraits/men/1.jpg',
+          unreadMessages: 3,
+          time: '10:30 AM',
+        },
+        {
+          id: 2,
+          name: ' Smith Work',
+          image: 'https://randomuser.me/api/portraits/women/2.jpg',
+          unreadMessages: 0,
+          time: 'Yesterday',
+        },
+      ]
+    : [];
+>>>>>>> Stashed changes
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
