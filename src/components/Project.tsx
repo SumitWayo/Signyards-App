@@ -1,5 +1,6 @@
+import React from 'react';
+import useTypedNavigation from '../hooks/useTypedNavigation';
 
-import React, { useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,29 +9,10 @@ import {
   Image,
   ActivityIndicator,
 } from 'react-native';
-import { useProjectContext } from '../context/ProjectContext';
-import useTypedNavigation from '../hooks/useTypedNavigation';
+
 import styles from './styles/Project.styles';
 import NoMessagesPlaceholder from './NoMessagePlaceholder';
 
-const Project = () => {
-  const navigation = useTypedNavigation<'ProjectPage'>();
-  const { projects, loading } = useProjectContext();
-
-  if (loading) {
-    return (
-      <View
-        style={[
-          styles.container,
-          { justifyContent: 'center', alignItems: 'center', flex: 1 },
-        ]}
-      >
-        <ActivityIndicator size="large" color="#000" />
-      </View>
-    );
-  }
-import styles from './styles/Project.styles';
-import NoMessagesPlaceholder from './NoMessagePlaceholder';
 
 type PersonType = {
   id: number;
@@ -107,5 +89,4 @@ const Project = () => {
   );
 };
 
-export default Project;
-
+export default Project;
