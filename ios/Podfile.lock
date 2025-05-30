@@ -1384,6 +1384,9 @@ PODS:
     - Yoga
   - react-native-rsa-native (2.0.5):
     - React
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   - react-native-safe-area-context (5.4.0):
     - DoubleConversion
@@ -2030,6 +2033,9 @@ DEPENDENCIES:
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-rsa-native (from `../node_modules/react-native-rsa-native`)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
@@ -2158,6 +2164,9 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-image-picker"
   react-native-rsa-native:
     :path: "../node_modules/react-native-rsa-native"
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"

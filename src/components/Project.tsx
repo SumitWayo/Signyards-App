@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import React from 'react';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../src/types/navigation';
@@ -6,6 +7,10 @@ import { useNavigation } from '@react-navigation/native';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'LoginPage'>;
 
+=======
+import React, { useEffect } from 'react';
+import useTypedNavigation from '../hooks/useTypedNavigation';
+>>>>>>> Stashed changes
 =======
 import React, { useEffect } from 'react';
 import useTypedNavigation from '../hooks/useTypedNavigation';
@@ -19,6 +24,7 @@ import {
 } from 'react-native';
 import styles from './styles/Project.styles';
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 const people = [
   { 
@@ -47,6 +53,8 @@ const people = [
 const Project = () => {
   const navigation = useNavigation<NavigationProp>();
 =======
+=======
+>>>>>>> Stashed changes
 type PersonType = {
   id: number;
   name: string;
