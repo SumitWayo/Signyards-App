@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useEffect } from 'react';
 import {
   View,
   Text,
@@ -28,6 +29,39 @@ const Project = () => {
       </View>
     );
   }
+import styles from './styles/Project.styles';
+import NoMessagesPlaceholder from './NoMessagePlaceholder';
+
+type PersonType = {
+  id: number;
+  name: string;
+  image: string;
+  unreadMessages: number;
+  time: string;
+};
+
+const Project = () => {
+  const navigation = useTypedNavigation<'ProjectPage'>();
+  const haveList = false;
+
+  const people: PersonType[] = haveList
+    ? [
+        {
+          id: 1,
+          name: 'Pune Extension',
+          image: 'https://randomuser.me/api/portraits/men/1.jpg',
+          unreadMessages: 3,
+          time: '10:30 AM',
+        },
+        {
+          id: 2,
+          name: ' Smith Work',
+          image: 'https://randomuser.me/api/portraits/women/2.jpg',
+          unreadMessages: 0,
+          time: 'Yesterday',
+        },
+      ]
+    : [];
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -74,3 +108,4 @@ const Project = () => {
 };
 
 export default Project;
+
