@@ -8,7 +8,7 @@ export default StyleSheet.create({ safeArea: {
     flex: 1,
   },
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f5f5',
     paddingTop: Platform.OS === 'android' ? 40 : 20,
     paddingHorizontal: width * 0.04,
     flex: 1,

@@ -10,6 +10,8 @@ import style from './styles/Loginpage.styles';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../src/types/navigation';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { sendOtp, verifyOtp, registerUser } from '../api/auth';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'LoginPage'>;
 
@@ -23,12 +25,9 @@ const LoginPage = () => {
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [focusInput, setFocusInput] = useState<number | null>(null);
 
-  const [phoneError, setPhoneError] = useState(''); // ✅ NEW
-  const [otpError, setOtpError] = useState(''); // ✅ NEW
-  const [timer, setTimer] = useState(60); // ✅ NEW
-
-  const authKey = '431765AxRg7j4aVz567052b5bP1';
-  const templateId = '6703c95ad6fc05465d44e512';
+  const [phoneError, setPhoneError] = useState('');
+  const [otpError, setOtpError] = useState('');
+  const [timer, setTimer] = useState(60);
 
   useEffect(() => {
     phoneInputRef.current?.focus();
@@ -36,9 +35,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (isOtpSent && timer > 0) {
-      const interval = setInterval(() => {
-        setTimer((prev) => prev - 1);
-      }, 1000);
+      const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
       return () => clearInterval(interval);
     }
   }, [isOtpSent, timer]);
@@ -51,26 +48,16 @@ const LoginPage = () => {
     setPhoneError('');
 
     try {
-      const url = `https://control.msg91.com/api/v5/otp?otp_expiry=1&template_id=${templateId}&mobile=91${phoneNumber}&authkey=${authKey}&realTimeResponse=1`;
-
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      const data = await response.json();
-
-      if (response.ok && data.type === 'success') {
+      const { success, data } = await sendOtp(phoneNumber);
+      if (success) {
         setIsOtpSent(true);
         setOtp(['', '', '', '']);
-        setTimer(60); // ✅ Reset timer
-        setTimeout(() => {
-          otpInputs[0].current?.focus();
-        }, 500);
+        setTimer(60);
+        setTimeout(() => otpInputs[0].current?.focus(), 500);
       } else {
         setPhoneError(data.message || 'Failed to send OTP');
       }
-    } catch (error) {
+    } catch (err) {
       setPhoneError('Something went wrong while sending OTP');
     }
   };
@@ -86,10 +73,6 @@ const LoginPage = () => {
     }
   };
 
-  const handleResendOtp = () => {
-    handleSendOtp(); // Reuse send OTP
-  };
-
   const handleVerifyOtp = async () => {
     const otpEntered = otp.join('');
     if (otpEntered.length < 4) {
@@ -99,16 +82,14 @@ const LoginPage = () => {
     setOtpError('');
 
     try {
-      const verifyUrl = `https://control.msg91.com/api/v5/otp/verify?otp=${otpEntered}&mobile=91${phoneNumber}&authkey=${authKey}`;
+      const { success, data } = await verifyOtp(phoneNumber, otpEntered);
+      if (success) {
+        await AsyncStorage.setItem('userPhone', phoneNumber);
 
-      const response = await fetch(verifyUrl, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      });
+        const { success: userSuccess, data: userData } = await registerUser(phoneNumber);
+        if (!userSuccess) {
+        }
 
-      const data = await response.json();
-
-      if (response.ok && data.type === 'success') {
         navigation.navigate('HomePage');
       } else {
         setOtpError(data.message || 'OTP did not match');
@@ -187,7 +168,7 @@ const LoginPage = () => {
               ) : (
                 <TouchableOpacity
                   style={[style.resendButton, { alignSelf: 'flex-start' }]}
-                  onPress={handleResendOtp}
+                  onPress={handleSendOtp}
                 >
                   <Text style={style.resendButtonText}>Resend Code</Text>
                 </TouchableOpacity>

@@ -38,7 +38,7 @@ const ListPage = () => {
           <View style={styles.orCircle}>
             <Text style={styles.orText}>OR</Text>
           </View>
-          <Text style={styles.headingList}>Enter Sub-Project Name</Text>
+          <Text style={styles.headingList}>Pick from existing</Text>
           <View style={styles.ListContainer}>
             {data.map((item) => (
               <View key={item.id} style={styles.listItem}>
