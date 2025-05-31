@@ -82,8 +82,8 @@ const MemberPage = () => {
 
   return (
     <>
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <ProjectInfoHeader title="Members" showSearch={false} />
+      <ScrollView contentContainerStyle={styles.scrollContainer} >
+        <ProjectInfoHeader title="Members" showSearch={false} rightIcon={true} />
 
         {people.map((person) => (
           <TouchableOpacity key={person.id} style={styles.personRow}>

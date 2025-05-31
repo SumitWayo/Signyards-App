@@ -37,7 +37,7 @@ const LandingPage = () => {
       <View style={style.bottomContainer}>
         <View style={style.bottomBorder} />
         <TouchableOpacity style={style.fullButton}
-          onPress={() => navigation.navigate("LoginPage" as keyof RootStackParamList)}
+          onPress={() => navigation.navigate("LoginPage")}
           >
           <Text style={style.buttonText}>Get Started</Text>
         </TouchableOpacity>

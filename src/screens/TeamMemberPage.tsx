@@ -26,10 +26,8 @@ const TeamMemberPage = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       {/* Header */}
-      <ProjectInfoHeader title='' showSearch={false}/>
-      <View style={styles.header}>
-        <Text style={styles.title}>Add Member</Text>
-      </View>
+            <ProjectInfoHeader title="Members" showSearch={false}  />
+
       {/* Main Content */}
       <ScrollView contentContainerStyle={styles.scrollContent}>
         {/* Photo Upload Section */}

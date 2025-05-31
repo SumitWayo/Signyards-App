@@ -1,6 +1,4 @@
 import React from 'react';
-import useTypedNavigation from '../hooks/useTypedNavigation';
-
 import {
   View,
   Text,
@@ -9,41 +7,27 @@ import {
   Image,
   ActivityIndicator,
 } from 'react-native';
-
+import { useProjectContext } from '../context/ProjectContext';
+import useTypedNavigation from '../hooks/useTypedNavigation';
 import styles from './styles/Project.styles';
 import NoMessagesPlaceholder from './NoMessagePlaceholder';
 
-
-type PersonType = {
-  id: number;
-  name: string;
-  image: string;
-  unreadMessages: number;
-  time: string;
-};
-
 const Project = () => {
   const navigation = useTypedNavigation<'ProjectPage'>();
-  const haveList = false;
+  const { projects, loading } = useProjectContext();
 
-  const people: PersonType[] = haveList
-    ? [
-        {
-          id: 1,
-          name: 'Pune Extension',
-          image: 'https://randomuser.me/api/portraits/men/1.jpg',
-          unreadMessages: 3,
-          time: '10:30 AM',
-        },
-        {
-          id: 2,
-          name: ' Smith Work',
-          image: 'https://randomuser.me/api/portraits/women/2.jpg',
-          unreadMessages: 0,
-          time: 'Yesterday',
-        },
-      ]
-    : [];
+  if (loading) {
+    return (
+      <View
+        style={[
+          styles.container,
+          { justifyContent: 'center', alignItems: 'center', flex: 1 },
+        ]}
+      >
+        <ActivityIndicator size="large" color="#000" />
+      </View>
+    );
+  }
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -89,4 +73,4 @@ const Project = () => {
   );
 };
 
-export default Project;
+export default Project;

@@ -221,8 +221,15 @@ const MediaPage = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-      <ProjectInfoHeader title="" showSearch={false} />
-
+<TouchableOpacity 
+             style={styles.arrowWrapper} 
+             onPress={() => navigation.goBack()}
+          >
+            <Image
+              source={require('../../assets/icons/backarrow.png')}
+              style={styles.arrowIcon}
+            />
+          </TouchableOpacity>
 
         <View style={styles.tabsWrapper}>
           {['Media', 'Links', 'Docs'].map((tab) => (
