@@ -1,3 +1,4 @@
+// ProjectProvider.tsx
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
@@ -26,10 +27,10 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
     try {
       setLoading(true);
       const phone = await AsyncStorage.getItem('userPhone');
-      if (!phone) {
-        Alert.alert('Error', 'Phone number not found. Please login again.');
-        return;
-      }
+      // if (!phone) {
+      //   Alert.alert('Error', 'Phone number not found. Please login again.');
+      //   return;
+      // }
 
       const response = await fetch('https://signyards.com/admin/appProject.php', {
         method: 'POST',
@@ -59,6 +60,7 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }
   };
 
+  // Optional: Remove this if you want each screen to control its own fetch
   useEffect(() => {
     fetchProjects();
   }, []);

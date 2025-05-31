@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Text,
@@ -14,7 +14,11 @@ import NoMessagesPlaceholder from './NoMessagePlaceholder';
 
 const Project = () => {
   const navigation = useTypedNavigation<'ProjectPage'>();
-  const { projects, loading } = useProjectContext();
+ const { projects, loading, refreshProjects } = useProjectContext();
+
+  useEffect(() => {
+    refreshProjects(); // Refresh when this screen loads
+  }, []);
 
   if (loading) {
     return (

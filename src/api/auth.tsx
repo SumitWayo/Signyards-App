@@ -4,14 +4,20 @@ const authKey = '431765AxRg7j4aVz567052b5bP1';
 const templateId = '6703c95ad6fc05465d44e512';
 
 export const sendOtp = async (phoneNumber: string) => {
+  console.log('check');
   const url = `https://control.msg91.com/api/v5/otp?otp_expiry=1&template_id=${templateId}&mobile=91${phoneNumber}&authkey=${authKey}&realTimeResponse=1`;
-
+  console.log('check2');
   const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
   });
 
+  console.log('check3');
+
   const data = await response.json();
+  console.log(data);
+  console.log(response);
+
   return { success: response.ok && data.type === 'success', data };
 };
 
