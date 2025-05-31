@@ -48,8 +48,13 @@ const LoginPage = () => {
     setPhoneError('');
 
     try {
+      console.log(phoneNumber);
+      console.log(phoneError);
       const { success, data } = await sendOtp(phoneNumber);
+      console.log(phoneNumber);
+      console.log(phoneError);
       if (success) {
+        console.log("Success");
         setIsOtpSent(true);
         setOtp(['', '', '', '']);
         setTimer(60);
