@@ -25,7 +25,7 @@ const ListPage = () => {
       <View style={{ flex: 1, justifyContent: 'space-between' }}>
         <View>
           <View style={styles.section}>
-            <Text style={styles.heading}>Enter Sub-Project Name</Text>
+            <Text style={styles.heading}>Enter List Name</Text>
             <View style={styles.searchContainer}>
               <TextInput
                 style={styles.searchInput}

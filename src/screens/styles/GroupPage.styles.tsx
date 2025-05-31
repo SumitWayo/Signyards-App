@@ -134,7 +134,7 @@ metaContainer: {
   flexDirection: 'row',
   justifyContent: 'flex-end',
   alignItems: 'center',
-  marginTop: 4,
+  marginTop: 8,
 },
 
 timestamp: {
