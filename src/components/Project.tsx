@@ -33,6 +33,8 @@ const Project = () => {
     );
   }
 
+
+
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       {projects.length > 0 ? (
