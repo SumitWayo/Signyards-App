@@ -93,7 +93,7 @@ export default StyleSheet.create({ safeArea: {
   flexDirection: 'row',
   alignItems: 'center',
   paddingHorizontal: 10,
-  paddingVertical: 8,
+  paddingVertical: 16,
   backgroundColor: '#fff',
 },
 
@@ -101,7 +101,7 @@ textInput: {
   flex: 1,
   fontSize: 16,
   paddingHorizontal: 10,
-  paddingVertical: Platform.OS === 'ios' ? 10 : 8,
+  paddingVertical: Platform.OS === 'ios' ? 15 : 8,
   backgroundColor: '#F0F0F0',
   borderRadius: 20,
   marginHorizontal: 8,
