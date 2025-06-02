@@ -19,6 +19,7 @@ const Project = () => {
   useEffect(() => {
     refreshProjects(); // Refresh when this screen loads
   }, []);
+  
 
   if (loading) {
     return (
