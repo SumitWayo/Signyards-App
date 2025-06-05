@@ -12,6 +12,10 @@ import { RootStackParamList } from '../../src/types/navigation';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { sendOtp, verifyOtp, registerUser } from '../api/auth';
+import { generateKeyPair } from '../utils/rsaUtils';
+import { storePrivateKey, getPrivateKey } from '../utils/keychainUtils';
+
+
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'LoginPage'>;
 
@@ -40,6 +44,21 @@ const LoginPage = () => {
     }
   }, [isOtpSent, timer]);
 
+  const saveKey = async (phoneNumber: string, privateKey: string) => {
+    try {
+      await storePrivateKey(phoneNumber, privateKey);
+      // console.log('Private key stored successfully');
+    } catch (error) {
+      // console.error('Error storing private key:', error);
+    }
+  };      
+    
+  // const retrieveKey = async () => {
+  //   const key = await getPrivateKey('user123');
+  //   console.log('Retrieved Key:', key);
+  // };
+
+
   const handleSendOtp = async () => {
     if (phoneNumber.length !== 10) {
       setPhoneError('Please enter a valid 10-digit phone number');
@@ -48,13 +67,8 @@ const LoginPage = () => {
     setPhoneError('');
 
     try {
-      console.log(phoneNumber);
-      console.log(phoneError);
       const { success, data } = await sendOtp(phoneNumber);
-      console.log(phoneNumber);
-      console.log(phoneError);
       if (success) {
-        console.log("Success");
         setIsOtpSent(true);
         setOtp(['', '', '', '']);
         setTimer(60);
@@ -91,10 +105,11 @@ const LoginPage = () => {
       if (success) {
         await AsyncStorage.setItem('userPhone', phoneNumber);
 
-        const { success: userSuccess, data: userData } = await registerUser(phoneNumber);
+        const { publicKey, privateKey } = await generateKeyPair();
+        const { success: userSuccess, data: userData } = await registerUser(phoneNumber,publicKey);
         if (!userSuccess) {
         }
-
+        await saveKey(phoneNumber, privateKey);
         navigation.navigate('HomePage');
       } else {
         setOtpError(data.message || 'OTP did not match');

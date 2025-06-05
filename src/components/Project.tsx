@@ -12,6 +12,8 @@ import useTypedNavigation from '../hooks/useTypedNavigation';
 import styles from './styles/Project.styles';
 import NoMessagesPlaceholder from './NoMessagePlaceholder';
 
+
+
 const Project = () => {
   const navigation = useTypedNavigation<'ProjectPage'>();
  const { projects, loading, refreshProjects } = useProjectContext();
