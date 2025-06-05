@@ -33,13 +33,14 @@ export const verifyOtp = async (phoneNumber: string, otp: string) => {
   return { success: response.ok && data.type === 'success', data };
 };
 
-export const registerUser = async (phoneNumber: string) => {
+export const registerUser = async (phoneNumber: string,publicKey: string) => {
   const response = await fetch('https://signyards.com/admin/getAppUsers.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       type: 'addUser',
       phone: phoneNumber,
+      publickey:publicKey
     }),
   });
 
