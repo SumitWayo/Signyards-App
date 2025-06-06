@@ -50,11 +50,11 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
         }));
         setProjects(mapped);
       } else {
-        Alert.alert('Error', data.message || 'Failed to load projects.');
+        // Alert.alert('Error', data.message || 'Failed to load projects.');
       }
     } catch (err) {
       console.error(err);
-      Alert.alert('Error', 'Failed to fetch projects.');
+      // Alert.alert('Error', 'Failed to fetch projects.');
     } finally {
       setLoading(false);
     }
