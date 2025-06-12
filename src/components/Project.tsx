@@ -12,7 +12,7 @@ import useTypedNavigation from '../hooks/useTypedNavigation';
 import styles from './styles/Project.styles';
 import NoMessagesPlaceholder from './NoMessagePlaceholder';
 
-// import { io } from "socket.io-client";
+import { io } from "socket.io-client";
 
 
 
@@ -25,29 +25,29 @@ const Project = () => {
   }, []);
   
 
-//   // ✅ Use your domain + path
-//   const socket = io("https://signyards.com", {
-//     transports: ["websocket"],
-//     secure: true,
-//     path: "/node-server/socket.io", // keep this for nginx routing
-//   });
+  // ✅ Use your domain + path
+  const socket = io("https://signyards.com", {
+    transports: ["websocket"],
+    secure: true,
+    path: "/node-server/socket.io", // keep this for nginx routing
+  });
 
-// socket.on("connect", () => {
-//   console.log("✅ Connected!", socket.id);
-//   socket.emit("user_connected", "9876543210");
-// });
+socket.on("connect", () => {
+  console.log("✅ Connected!", socket.id);
+  socket.emit("user_connected", "9876543210");
+});
 
-// socket.on("receive_project", (project) => {
-//   console.log("📦 Received project:", project);
-// });
+socket.on("receive_project", (project) => {
+  console.log("📦 Received project:", project);
+});
 
-// socket.on("connect_error", (err) => {
-//   console.log("❌ Socket connection error:", err.message);
-// });
+socket.on("connect_error", (err) => {
+  console.log("❌ Socket connection error:", err.message);
+});
 
-// socket.on("disconnect", (reason) => {
-//   console.log("⚠️ Socket disconnected:", reason);
-// })
+socket.on("disconnect", (reason) => {
+  console.log("⚠️ Socket disconnected:", reason);
+})
 
   if (loading) {
     return (
