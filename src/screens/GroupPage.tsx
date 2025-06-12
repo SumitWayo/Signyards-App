@@ -12,7 +12,6 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from 'react-native';
-
 import { useNavigation, useRoute, RouteProp, NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from '../../src/types/navigation';
 import { useProjectContext } from '../context/ProjectContext';
