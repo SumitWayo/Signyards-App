@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   View,
   SafeAreaView,
@@ -15,9 +15,16 @@ import {
 
 import { useNavigation, useRoute, RouteProp, NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from '../../src/types/navigation';
-import { useProjectContext } from '../context/ProjectContext'; // make sure this exists and provides projects
+import { useProjectContext } from '../context/ProjectContext';
 import styles from './styles/GroupPage.styles';
 import ExtraOptionsPanel from '../components/ExtraOptionsPanel';
+
+import {
+  createTables,
+  insertMessage,
+  getMessagesByProjectId,
+  Message as DBMessage,
+} from '../utils/database';
 
 type GroupPageRouteProp = RouteProp<RootStackParamList, 'GroupPage'>;
 type GroupPageNavigationProp = NavigationProp<RootStackParamList, 'GroupPage'>;
@@ -32,38 +39,53 @@ type Message = {
 const GroupPage = () => {
   const navigation = useNavigation<GroupPageNavigationProp>();
   const route = useRoute<GroupPageRouteProp>();
-
   const { projectId } = route.params;
   const { projects } = useProjectContext();
 
-  // Get project name from context by projectId
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState('');
+  const [showOptions, setShowOptions] = useState(false);
+
+  const labels = ['Electricals', 'Plywood home', 'Sign board jabalpur'];
+
   const projectName = useMemo(() => {
     const project = projects.find((p) => p.id === projectId);
     return project ? project.name : 'Unknown Project';
   }, [projects, projectId]);
 
-  const labels = ['Electricals', 'Plywood home', 'Sign board jabalpur'];
+  useEffect(() => {
+    const loadMessages = async () => {
+      await createTables();
+      const storedMessages: DBMessage[] = await getMessagesByProjectId(projectId);
+      setMessages(storedMessages);
+    };
 
-  const [messages, setMessages] = useState<Message[]>([
-    { id: '1', text: 'Hi, how can I help you?', isUser: false, timestamp: '09:00 AM' },
-    { id: '2', text: 'I want to inquire about plywood sheets.', isUser: true, timestamp: '09:01 AM' },
-  ]);
-  const [input, setInput] = useState('');
-  const [showOptions, setShowOptions] = useState(false);
+    loadMessages();
+  }, [projectId]);
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (input.trim()) {
       const newMessage: Message = {
         id: Date.now().toString(),
         text: input,
         isUser: true,
-        timestamp: new Date().toLocaleTimeString([], {
-          hour: '2-digit',
-          minute: '2-digit',
-        }),
+        timestamp: new Date().toISOString(),
       };
-      setMessages([...messages, newMessage]);
+
+      setMessages((prev) => [...prev, newMessage]);
       setInput('');
+
+      try {
+        await insertMessage(
+          newMessage.id,
+          projectId,
+          newMessage.text,
+          newMessage.isUser,
+          newMessage.timestamp
+        );
+      } catch (error) {
+        console.error('Failed to save message:', error);
+      }
     }
   };
 
@@ -75,12 +97,15 @@ const GroupPage = () => {
   const navigateToSubProjectPage = () => {
     navigation.navigate('SubProjectPage', { projectId });
   };
+
   const navigateToMediaList = () => {
     navigation.navigate('ProjectInfoPage', { projectId });
   };
+
   const navigateToMemberPage = () => {
     navigation.navigate('MemberPage', { projectId });
   };
+
 
   const renderItem = ({ item }: { item: Message }) => (
     <View

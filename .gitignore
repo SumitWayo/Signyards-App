@@ -1,0 +1,28 @@
+# React Native
+node_modules/
+android/.gradle/
+android/app/build/
+android/app/.cxx/
+android/build/
+ios/Pods/
+ios/DerivedData/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.xcworkspace
+*.xcodeproj
+*.idea/
+*.DS_Store
+*.log
+*.iml
+
+# SQLite and other native libs
+node_modules/**/android/build/
+node_modules/**/android/.cxx/
+node_modules/.generated/
