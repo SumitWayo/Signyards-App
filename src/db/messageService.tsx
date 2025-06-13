@@ -1,35 +1,22 @@
-import SQLite from 'react-native-sqlite-storage';
+import { getDBConnection } from './database';
 
-SQLite.DEBUG(true);
-SQLite.enablePromise(true);
-
-const database_name = 'MyAppDB.db';
-const database_version = '1.0';
-const database_displayname = 'My SQLite Database';
-const database_size = 200000;
-
-let dbInstance: SQLite.SQLiteDatabase | null = null;
-
-export const getDBConnection = async (): Promise<SQLite.SQLiteDatabase> => {
-  if (dbInstance) return dbInstance;
-  dbInstance = await SQLite.openDatabase(
-    database_name,
-    database_version,
-    database_displayname,
-    database_size
-  );
-  return dbInstance;
+export type Message = {
+  id: string;
+  projectId: string;
+  text: string;
+  isUser: boolean;
+  timestamp: string;
 };
 
-export const createTables = async (): Promise<void> => {
+export const createMessagesTable = async (): Promise<void> => {
   const db = await getDBConnection();
   await db.executeSql(`
     CREATE TABLE IF NOT EXISTS messages (
-      id TEXT PRIMARY KEY NOT NULL,
-      projectId TEXT NOT NULL,
-      text TEXT NOT NULL,
-      isUser INTEGER NOT NULL,
-      timestamp TEXT NOT NULL
+      id TEXT PRIMARY KEY,
+      projectId TEXT,
+      text TEXT,
+      isUser INTEGER,
+      timestamp TEXT
     );
   `);
 };
@@ -46,14 +33,6 @@ export const insertMessage = async (
     `INSERT INTO messages (id, projectId, text, isUser, timestamp) VALUES (?, ?, ?, ?, ?);`,
     [id, projectId, text, isUser ? 1 : 0, timestamp]
   );
-};
-
-export type Message = {
-  id: string;
-  projectId: string;
-  text: string;
-  isUser: boolean;
-  timestamp: string;
 };
 
 export const getMessagesByProjectId = async (projectId: string): Promise<Message[]> => {

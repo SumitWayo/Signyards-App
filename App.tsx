@@ -23,12 +23,15 @@ import { FooterProvider } from './src/context/FooterContext';
 import Project from './src/components/Project';
 import Dms from './src/components/Dms';
 import { ProjectProvider } from './src/context/ProjectContext';
+import { createAppUsersTable } from './src/db/userService';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [initialRoute, setInitialRoute] = useState<string | null>(null);
-
+useEffect(() => {
+  createAppUsersTable();
+}, []);
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {

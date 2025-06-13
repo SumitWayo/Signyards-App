@@ -20,11 +20,11 @@ import styles from './styles/GroupPage.styles';
 import ExtraOptionsPanel from '../components/ExtraOptionsPanel';
 
 import {
-  createTables,
+createMessagesTable,
   insertMessage,
   getMessagesByProjectId,
   Message as DBMessage,
-} from '../utils/database';
+} from '../db/messageService';
 
 type GroupPageRouteProp = RouteProp<RootStackParamList, 'GroupPage'>;
 type GroupPageNavigationProp = NavigationProp<RootStackParamList, 'GroupPage'>;
@@ -55,7 +55,7 @@ const GroupPage = () => {
 
   useEffect(() => {
     const loadMessages = async () => {
-      await createTables();
+      await createMessagesTable();
       const storedMessages: DBMessage[] = await getMessagesByProjectId(projectId);
       setMessages(storedMessages);
     };
@@ -216,7 +216,7 @@ const GroupPage = () => {
                   : require('../../assets/icons/chatplus.png')
               }
               style={styles.icon}
-            />
+            />  
           </TouchableOpacity>
 
           <TextInput

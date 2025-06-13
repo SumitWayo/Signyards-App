@@ -18,6 +18,13 @@ import styles from './styles/ProjectPage.styles';
 import { Button } from '../components/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useProjectContext } from '../context/ProjectContext';
+import { addOrUpdateProject } from '../api/projectApi';
+import {
+  createProjectTable,
+  logAllProjects,
+  insertProject,
+  updateProject as updateLocalProject,
+} from '../db/projectService'; // Adjust path as needed
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'ProjectPage'>;
 type RouteProps = RouteProp<RootStackParamList, 'ProjectPage'>;
@@ -32,6 +39,13 @@ const ProjectPage = () => {
 
   const [projectName, setProjectName] = useState('');
   const [photoUri, setPhotoUri] = useState<string | null>(null);
+useEffect(() => {
+  const setup = async () => {
+    await createProjectTable();
+    await logAllProjects()
+  };
+  setup();
+}, []);
 
   // Pre-fill data if editing
   useEffect(() => {
@@ -84,7 +98,7 @@ const ProjectPage = () => {
     );
   };
 
-  const addOrUpdateProject = async () => {
+const handleAddOrUpdateProject = async () => {
   if (projectName.trim() === '') {
     Alert.alert('Validation Error', 'Please enter a project name');
     return;
@@ -97,57 +111,51 @@ const ProjectPage = () => {
       return;
     }
 
-    let payload;
-    if (edit && projectId) {
-      payload = {
-        type: 'updateProject',
-        project_id: projectId.toString(),
-        project_name: projectName,
-        image_url: photoUri || '',
-      };
-    } else {
-      payload = {
-        type: 'addProject',
-        phone: phone,
-        project_name: projectName,
-        image_url: photoUri || '',
-      };
-    }
-
-    const response = await fetch('https://signyards.com/admin/appProject.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
+    // 1. Send API request
+    await addOrUpdateProject({
+      edit,
+      projectId,
+      projectName,
+      photoUri,
+      phone,
     });
 
-    const data = await response.json();
+    // 2. Save to local SQLite DB
+    const userId = parseInt(phone); // assuming userPhone is numeric
+    const localProject = {
+      id: edit ? projectId : Date.now(), // use timestamp as temporary ID if new
+      project_name: projectName,
+      image_url: photoUri || '',
+      user_id: userId,
+    };
 
-    if (response.ok) {
-      Alert.alert(
-        edit ? 'Project Updated' : 'Project Created',
-        edit
-          ? `Your project "${projectName}" has been updated.`
-          : `Your project "${projectName}" has been created.`
-      );
-
-      await refreshProjects();
-
-      // Navigate conditionally
-      if (edit) {
-        navigation.navigate('GroupPage', { projectId });
-      } else {
-        navigation.navigate('HomePage');
-      }
+    if (edit) {
+      await updateLocalProject(localProject);
     } else {
-      Alert.alert('Error', data.message || 'Failed to save project');
+      await insertProject(localProject);
     }
-  } catch (error) {
-    Alert.alert('Error', 'Network error occurred, please try again later.');
+
+    // 3. UI feedback and navigation
+    Alert.alert(
+      edit ? 'Project Updated' : 'Project Created',
+      edit
+        ? `Your project "${projectName}" has been updated.`
+        : `Your project "${projectName}" has been created.`
+    );
+
+    await refreshProjects();
+
+    if (edit) {
+      navigation.navigate('GroupPage', { projectId });
+    } else {
+      navigation.navigate('HomePage');
+    }
+  } catch (error: any) {
+    Alert.alert('Error', error.message || 'Network error occurred, please try again later.');
     console.error(error);
   }
 };
+
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -181,7 +189,7 @@ const ProjectPage = () => {
         </View>
       </ScrollView>
 
-      <Button title={edit ? 'Save' : 'Create Project'} onPress={addOrUpdateProject} />
+<Button title={edit ? 'Save' : 'Create Project'} onPress={handleAddOrUpdateProject} />
     </SafeAreaView>
   );
 };

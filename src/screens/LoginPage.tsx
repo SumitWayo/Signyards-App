@@ -13,9 +13,8 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { sendOtp, verifyOtp, registerUser } from '../api/auth';
 import { generateKeyPair } from '../utils/rsaUtils';
-import { storePrivateKey, getPrivateKey } from '../utils/keychainUtils';
-
-
+import { storePrivateKey } from '../utils/keychainUtils';
+import { createAppUsersTable, insertUser } from '../db/userService';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'LoginPage'>;
 
@@ -47,17 +46,10 @@ const LoginPage = () => {
   const saveKey = async (phoneNumber: string, privateKey: string) => {
     try {
       await storePrivateKey(phoneNumber, privateKey);
-      // console.log('Private key stored successfully');
     } catch (error) {
-      // console.error('Error storing private key:', error);
+      console.error('Error storing private key:', error);
     }
-  };      
-    
-  // const retrieveKey = async () => {
-  //   const key = await getPrivateKey('user123');
-  //   console.log('Retrieved Key:', key);
-  // };
-
+  };
 
   const handleSendOtp = async () => {
     if (phoneNumber.length !== 10) {
@@ -92,32 +84,37 @@ const LoginPage = () => {
     }
   };
 
-  const handleVerifyOtp = async () => {
-    const otpEntered = otp.join('');
-    if (otpEntered.length < 4) {
-      setOtpError('Please enter the complete 4-digit OTP');
-      return;
-    }
-    setOtpError('');
+const handleVerifyOtp = async () => {
+  const otpEntered = otp.join('');
+  if (otpEntered.length < 4) {
+    setOtpError('Please enter the complete 4-digit OTP');
+    return;
+  }
 
-    try {
-      const { success, data } = await verifyOtp(phoneNumber, otpEntered);
-      if (success) {
-        await AsyncStorage.setItem('userPhone', phoneNumber);
+  try {
+    const { success, data } = await verifyOtp(phoneNumber, otpEntered);
 
-        const { publicKey, privateKey } = await generateKeyPair();
-        const { success: userSuccess, data: userData } = await registerUser(phoneNumber,publicKey);
-        if (!userSuccess) {
-        }
-        await saveKey(phoneNumber, privateKey);
-        navigation.navigate('HomePage');
-      } else {
-        setOtpError(data.message || 'OTP did not match');
-      }
-    } catch (error) {
-      setOtpError('Error verifying OTP');
+    if (success) {
+      await AsyncStorage.setItem('userPhone', phoneNumber);
+
+      const { publicKey, privateKey } = await generateKeyPair();
+
+      const { success: userSuccess } = await registerUser(phoneNumber, publicKey);
+      // Even if user already exists on backend, continue
+
+      await saveKey(phoneNumber, privateKey);
+
+      // Save user in local SQLite DB
+      await createAppUsersTable();
+      await insertUser('', '', phoneNumber, 'user');
+      navigation.navigate('HomePage');
+    } else {
+      setOtpError(data.message || 'OTP did not match');
     }
-  };
+  } catch (error) {
+    setOtpError('Error verifying OTP');
+  }
+};
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">

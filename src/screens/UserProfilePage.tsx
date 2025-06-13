@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import {
-  View,
-  Image,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Alert,
-  ActivityIndicator,
+  View, Text, TextInput, TouchableOpacity, Alert, Image, ActivityIndicator
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import ProjectInfoHeader from '../components/ProjectInfoPageHeader';
 import { Button } from '../components/Button';
 import styles from '../screens/styles/UserProfile.styles';
+import {
+  getUserByPhone,
+  updateLocalUser,
+  createAppUsersTable
+} from '../db/userService';
+import { editUser } from '../api/auth';
 
 const UserProfilePage = () => {
   const [photoUri, setPhotoUri] = useState<string | null>(null);
-
-  // User data state
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
@@ -27,68 +25,40 @@ const UserProfilePage = () => {
   useEffect(() => {
     const initialize = async () => {
       try {
+        await createAppUsersTable();
         const storedPhone = await AsyncStorage.getItem('userPhone');
         if (storedPhone) {
           setPhone(`+91 ${storedPhone}`);
-          fetchUserData(storedPhone);
+          await loadLocalUserData(storedPhone);
         } else {
           Alert.alert('Error', 'Phone number not found in storage.');
-          setLoading(false);
         }
       } catch (err) {
-        Alert.alert('Error', 'Failed to load phone number.');
         console.error(err);
+        Alert.alert('Error', 'Failed to load user data.');
+      } finally {
         setLoading(false);
       }
     };
-
     initialize();
   }, []);
 
-  const fetchUserData = async (rawPhone: string) => {
+  const loadLocalUserData = async (rawPhone: string) => {
     try {
-      const response = await fetch('https://signyards.com/admin/getAppUsers.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          type: 'getUser',
-          phone: rawPhone,
-        }),
-      });
-
-      const json = await response.json();
-
-      if (json.status === 'success' && json.data) {
-        const user = json.data;
+      const user = await getUserByPhone(rawPhone);
+      if (user) {
         setName(user.name || '');
         setEmail(user.email || '');
         setRole(user.role || '');
       } else {
-        Alert.alert('Error', json.message || 'Failed to fetch user data');
+        console.log('User not found in local DB');
       }
     } catch (error) {
-      Alert.alert('Error', 'Network error occurred');
-      console.error(error);
-    } finally {
-      setLoading(false);
+      console.error('Failed to fetch local user data:', error);
     }
   };
 
-  const chooseImage = () => {
-    Alert.alert(
-      'Change Profile Photo',
-      'Choose an option',
-      [
-        { text: 'Camera', onPress: openCamera },
-        { text: 'Gallery', onPress: openGallery },
-        { text: 'Cancel', style: 'cancel' },
-      ],
-      { cancelable: true }
-    );
-  };
-const handleSave = async () => {
+ const handleSave = async () => {
   try {
     const storedPhone = await AsyncStorage.getItem('userPhone');
     if (!storedPhone) {
@@ -96,23 +66,11 @@ const handleSave = async () => {
       return;
     }
 
-    const response = await fetch('https://signyards.com/admin/getAppUsers.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        type: 'editUser',
-        phone: storedPhone.replace('+91 ', ''),
-        name,
-        email,
-        role,
-      }),
-    });
-
-    const json = await response.json();
+    const json = await editUser(storedPhone, name, email, role);
 
     if (json.status === 'success') {
+      await updateLocalUser(storedPhone, name, email, role);
+      await loadLocalUserData(storedPhone); // Refresh UI
       Alert.alert('Success', 'Profile updated successfully!');
     } else {
       Alert.alert('Error', json.message || 'Failed to update profile');
@@ -123,31 +81,25 @@ const handleSave = async () => {
   }
 };
 
+
+  const chooseImage = () => {
+    Alert.alert('Change Profile Photo', 'Choose an option', [
+      { text: 'Camera', onPress: openCamera },
+      { text: 'Gallery', onPress: openGallery },
+      { text: 'Cancel', style: 'cancel' },
+    ]);
+  };
+
   const openCamera = () => {
-    launchCamera(
-      {
-        mediaType: 'photo',
-        saveToPhotos: true,
-      },
-      response => {
-        if (response.assets && response.assets.length > 0) {
-          setPhotoUri(response.assets[0].uri || null);
-        }
-      }
-    );
+    launchCamera({ mediaType: 'photo', saveToPhotos: true }, response => {
+      if (response.assets?.length) setPhotoUri(response.assets[0].uri || null);
+    });
   };
 
   const openGallery = () => {
-    launchImageLibrary(
-      {
-        mediaType: 'photo',
-      },
-      response => {
-        if (response.assets && response.assets.length > 0) {
-          setPhotoUri(response.assets[0].uri || null);
-        }
-      }
-    );
+    launchImageLibrary({ mediaType: 'photo' }, response => {
+      if (response.assets?.length) setPhotoUri(response.assets[0].uri || null);
+    });
   };
 
   if (loading) {
@@ -162,7 +114,6 @@ const handleSave = async () => {
     <View style={styles.container}>
       <ProjectInfoHeader title="Profile" showSearch={false} />
 
-      {/* Profile Image with Edit Icon */}
       <TouchableOpacity onPress={chooseImage} style={styles.profileContainer}>
         <View style={styles.circle}>
           <Image
@@ -185,10 +136,8 @@ const handleSave = async () => {
         </View>
       </TouchableOpacity>
 
-      {/* Phone Number */}
       <Text style={styles.phoneNumber}>{phone}</Text>
 
-      {/* Input Fields */}
       <Text style={styles.heading}>Enter Name</Text>
       <View style={styles.searchContainer}>
         <TextInput
@@ -224,7 +173,6 @@ const handleSave = async () => {
         />
       </View>
 
-      {/* Save Button */}
       <View style={styles.buttonContainer}>
         <Button title="Save" onPress={handleSave} />
       </View>
